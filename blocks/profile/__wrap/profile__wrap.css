@@ -1,0 +1,15 @@
+.profile__wrap {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-left: 22px;
+  padding-bottom: 14px;
+}
+
+@media (min-width: 760px) {
+  .profile__wrap {
+    padding-left: 0;
+    gap: 18px;
+  }
+}
+

@@ -1,14 +1,15 @@
 .header {
   max-width: 320px;
   min-height: 56px;
-  margin: 0 auto;
+  padding: 27px 0 0 27px;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  margin: 0 auto;
 }
 
 @media (min-width: 610px) {
   .header {
     max-width: 450px;
-    margin: 45px auto 0;
+    padding: 45px 0 0;
   }
 }
 
@@ -27,6 +28,6 @@
 
 @media (min-width: 1280px) {
   .header {
-    max-width: 882px;
+    max-width: 880px;
   }
 }
