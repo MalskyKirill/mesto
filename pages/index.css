@@ -20,3 +20,17 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__job/profile__job.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+
+/* elements */
+@import url(../blocks/elements/elements.css);
+
+/* cards */
+@import url(../blocks/cards/cards.css);
+
+/* card */
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__photo/card__photo.css);
+@import url(../blocks/card/__wrap/card__wrap.css);
+@import url(../blocks/card/__photo/card__photo.css);
+@import url(../blocks/card/__name/card__name.css);
+@import url(../blocks/card/__like/card__like.css);

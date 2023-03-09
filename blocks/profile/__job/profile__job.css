@@ -6,7 +6,7 @@
 }
 
 @media (min-width: 900px) {
-  .profile__name {
+  .profile__job {
     font-size: 18px;
     line-height: 22px;
   }
