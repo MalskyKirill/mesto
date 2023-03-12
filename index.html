@@ -26,13 +26,13 @@
         </div>
         <button class="profile__add-button" type="button"></button>
       </section>
-      <section class="elements">
+      <section class="elements" aria-label="Фоточки">
         <ul class="cards">
           <li class="card">
             <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="card__photo">
             <div class="card__wrap">
               <p class="card__name">Карачаевск</p>
-              <button class="card__like"></button>
+              <button class="card__like card__like_active"></button>
             </div>
           </li>
           <li class="card">
@@ -52,7 +52,7 @@
           <li class="card">
             <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="card__photo">
             <div class="card__wrap">
-              <p class="card__name">Карачаевск</p>
+              <p class="card__name">Карачаево-Черкеск</p>
               <button class="card__like"></button>
             </div>
           </li>
@@ -77,6 +77,17 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
+  <section class="popup">
+    <div class="popup__container">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <button class="popup__close" type="button"></button>
+      <form class="popup__form" id="dataField">
+        <input type="text" class="popup__field popup__field_name" value="Жак-Ив Кусто" name="name">
+        <input type="text" class="popup__field popup__field_job" value="Исследователь океана" name="job">
+      </form>
+      <button class="popup__save" form="dataField">Сохранить</button>
+    </div>
+  </section>
 
 </body>
 
