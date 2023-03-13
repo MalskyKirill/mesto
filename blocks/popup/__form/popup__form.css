@@ -1,7 +1,9 @@
 .popup__form {
-  padding: 75px 0 45px;
+  padding-top: 75px;
+  padding-bottom: 42px;
   display: flex;
   flex-direction: column;
+  gap: 27px;
 }
 
 @media (min-width: 610px) {
