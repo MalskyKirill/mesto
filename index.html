@@ -29,45 +29,45 @@
       <section class="elements" aria-label="Фоточки">
         <ul class="cards">
           <li class="card">
-            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="card__photo">
+            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Монастырь в Карачаевске" class="card__photo">
             <div class="card__wrap">
-              <p class="card__name">Карачаевск</p>
-              <button class="card__like card__like_active"></button>
+              <h2 class="card__name">Карачаевск</h2>
+              <button class="card__like card__like_active" type="button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус" class="card__photo">
             <div class="card__wrap">
-              <p class="card__name">Гора Эльбрус</p>
-              <button class="card__like"></button>
+              <h2 class="card__name">Гора Эльбрус</h2>
+              <button class="card__like" type="button"></button>
             </div>
           </li>
           <li class="card">
-            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай" class="card__photo">
+            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Горы Домбая" class="card__photo">
             <div class="card__wrap">
-              <p class="card__name">Домбай</p>
-              <button class="card__like"></button>
+              <h2 class="card__name">Домбай</h2>
+              <button class="card__like" type="button"></button>
             </div>
           </li>
           <li class="card">
-            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск" class="card__photo">
+            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Монастырь в Карачаевске" class="card__photo">
             <div class="card__wrap">
-              <p class="card__name">Карачаево-Черкеск</p>
-              <button class="card__like"></button>
+              <h2 class="card__name">Карачаево-Черкеск</h2>
+              <button class="card__like" type="button"></button>
             </div>
           </li>
           <li class="card">
             <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус" class="card__photo">
             <div class="card__wrap">
-              <p class="card__name">Гора Эльбрус</p>
-              <button class="card__like"></button>
+              <h2 class="card__name">Гора Эльбрус</h2>
+              <button class="card__like" type="button"></button>
             </div>
           </li>
           <li class="card">
-            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай" class="card__photo">
+            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Горы Домбая" class="card__photo">
             <div class="card__wrap">
-              <p class="card__name">Домбай</p>
-              <button class="card__like"></button>
+              <h2 class="card__name">Домбай</h2>
+              <button class="card__like" type="button"></button>
             </div>
           </li>
         </ul>
@@ -77,18 +77,18 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <section class="popup">
+  <div class="popup">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button class="popup__close" type="button"></button>
-      <form class="popup__form" id="dataField">
-        <input type="text" class="popup__field popup__field_name" value="Жак-Ив Кусто" name="name">
-        <input type="text" class="popup__field popup__field_job" value="Исследователь океана" name="job">
+      <form class="popup__form" id="dataField" name="popupForm">
+        <input type="text" class="popup__field popup__field_next_name" value="Жак-Ив Кусто" name="name">
+        <input type="text" class="popup__field popup__field_next_job" value="Исследователь океана" name="job">
       </form>
       <button class="popup__save" type="submit" form="dataField">Сохранить</button>
     </div>
-  </section>
-  <script src="./js/main.js"></script>
+  </div>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

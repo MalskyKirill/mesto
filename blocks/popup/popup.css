@@ -7,11 +7,8 @@
   background-color: var(--background-color-popup);
   display: none;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   z-index: 999;
   font-family: var(--family);
 }
 
-.popup_active{
-  display: flex;
-}
