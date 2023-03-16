@@ -1,7 +1,7 @@
 .card__wrap {
   display: flex;
   background-color: var(--white);
-  min-height: 79px;
+  padding: 24px 0 26px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   margin: 0;

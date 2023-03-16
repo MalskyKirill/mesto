@@ -10,6 +10,12 @@
   .profile__wrap {
     padding-left: 0;
     gap: 18px;
+    min-width: 200px;
+  }
+}
+
+@media (min-width: 900px) {
+  .profile__wrap {
     min-width: 335px;
   }
 }

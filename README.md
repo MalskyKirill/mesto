@@ -16,7 +16,7 @@ JavaScript
 
 Grid
 Flexbox
-Медиазапросы
+Медиазапросы (верстка mobile-first)
 VanilaJS
 
 ### Сайт
