@@ -117,6 +117,15 @@ function renderCard(card) {
   cardsListElement.prepend(htmlCardElement);
 }
 
+// лайк карточки
+const likeCardsElements = document.querySelectorAll('.card__like');
+function likeClickHandler(evt) {
+  evt.preventDefault();
+
+  const target = evt.target;
+  target.classList.toggle('card__like_active');
+}
+
 // слушатели событий
 openProfileBtnElement.addEventListener('click', openPopup);
 openNewPlaceBtnElement.addEventListener('click', openPopup);
@@ -126,3 +135,5 @@ closeBtnElements.forEach((btn) => btn.addEventListener('click', closePopup));
 
 formProfileElement.addEventListener('submit', handleFormSubmit);
 formNewPlaceElement.addEventListener('submit', handleFormSubmit);
+
+likeCardsElements.forEach((card) => card.addEventListener('click', likeClickHandler));
