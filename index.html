@@ -28,48 +28,6 @@
       </section>
       <section class="elements" aria-label="Фоточки">
         <ul class="cards">
-          <li class="card">
-            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Монастырь в Карачаевске" class="card__photo">
-            <div class="card__wrap">
-              <h2 class="card__name">Карачаевск</h2>
-              <button class="card__like card__like_active" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус" class="card__photo">
-            <div class="card__wrap">
-              <h2 class="card__name">Гора Эльбрус</h2>
-              <button class="card__like" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Горы Домбая" class="card__photo">
-            <div class="card__wrap">
-              <h2 class="card__name">Домбай</h2>
-              <button class="card__like" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Монастырь в Карачаевске" class="card__photo">
-            <div class="card__wrap">
-              <h2 class="card__name">Карачаево-Черкеск</h2>
-              <button class="card__like" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус" class="card__photo">
-            <div class="card__wrap">
-              <h2 class="card__name">Гора Эльбрус</h2>
-              <button class="card__like" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Горы Домбая" class="card__photo">
-            <div class="card__wrap">
-              <h2 class="card__name">Домбай</h2>
-              <button class="card__like" type="button"></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
@@ -88,6 +46,15 @@
       <button class="popup__save" type="submit" form="dataField">Сохранить</button>
     </div>
   </div>
+  <template class="card_template">
+    <li class="card">
+      <img src="" alt="Случайная фотка" class="card__photo">
+      <div class="card__wrap">
+        <h2 class="card__name"></h2>
+        <button class="card__like card__like_active" type="button"></button>
+      </div>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 
