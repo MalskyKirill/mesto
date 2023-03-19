@@ -95,18 +95,26 @@ function handleFormSubmit(evt) {
     card.name = titleFormFieldElement.value;
     card.link = linkFormFieldElement.value;
     renderCard(card);
+
+    titleFormFieldElement.value = '';
+    linkFormFieldElement.value = '';
   }
 
   closePopup();
 }
 
-//добавление карточек на страницу
+//добавление карточек на страницу и лайки
 initialCards.forEach(renderFirstArrayCards);
 
 function renderFirstArrayCards(card) {
   const htmlCardElement = cardTemplateElement.cloneNode(true);
   htmlCardElement.querySelector('.card__name').textContent = card.name;
   htmlCardElement.querySelector('.card__photo').src = card.link;
+  htmlCardElement
+    .querySelector('.card__like')
+    .addEventListener('click', (evt) => {
+      evt.target.classList.toggle('card__like_active');
+    });
   cardsListElement.append(htmlCardElement);
 }
 
@@ -114,16 +122,12 @@ function renderCard(card) {
   const htmlCardElement = cardTemplateElement.cloneNode(true);
   htmlCardElement.querySelector('.card__name').textContent = card.name;
   htmlCardElement.querySelector('.card__photo').src = card.link;
+  htmlCardElement
+    .querySelector('.card__like')
+    .addEventListener('click', (evt) => {
+      evt.target.classList.toggle('card__like_active');
+    });
   cardsListElement.prepend(htmlCardElement);
-}
-
-// лайк карточки
-const likeCardsElements = document.querySelectorAll('.card__like');
-function likeClickHandler(evt) {
-  evt.preventDefault();
-
-  const target = evt.target;
-  target.classList.toggle('card__like_active');
 }
 
 // слушатели событий
@@ -135,5 +139,3 @@ closeBtnElements.forEach((btn) => btn.addEventListener('click', closePopup));
 
 formProfileElement.addEventListener('submit', handleFormSubmit);
 formNewPlaceElement.addEventListener('submit', handleFormSubmit);
-
-likeCardsElements.forEach((card) => card.addEventListener('click', likeClickHandler));
