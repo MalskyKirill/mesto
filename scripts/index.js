@@ -112,9 +112,7 @@ function renderFirstArrayCards(card) {
   htmlCardElement.querySelector('.card__photo').src = card.link;
   htmlCardElement
     .querySelector('.card__like')
-    .addEventListener('click', (evt) => {
-      evt.target.classList.toggle('card__like_active');
-    });
+    .addEventListener('click', likeCardClickHandler);
   cardsListElement.append(htmlCardElement);
 }
 
@@ -124,10 +122,14 @@ function renderCard(card) {
   htmlCardElement.querySelector('.card__photo').src = card.link;
   htmlCardElement
     .querySelector('.card__like')
-    .addEventListener('click', (evt) => {
-      evt.target.classList.toggle('card__like_active');
-    });
+    .addEventListener('click', likeCardClickHandler);
   cardsListElement.prepend(htmlCardElement);
+}
+
+// лайки
+function likeCardClickHandler(evt) {
+  evt.preventDefault();
+  evt.target.classList.toggle('card__like_active');
 }
 
 // слушатели событий
