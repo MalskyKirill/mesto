@@ -35,6 +35,7 @@
       <p class="footer__text">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
+  <!-- попап редактирования профайла -->
   <div class="popup" id="popupProfile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
@@ -46,6 +47,7 @@
       <button class="popup__save" type="submit" form="profileField">Сохранить</button>
     </div>
   </div>
+  <!-- попап добавления новой карточки -->
   <div class="popup" id="popupNewPlace">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
@@ -55,6 +57,14 @@
         <input type="text" class="popup__field popup__field_next_link" placeholder="Ссылка на картинку" name="link">
       </form>
       <button class="popup__save" type="submit" form="newPlaceField">Создать</button>
+    </div>
+  </div>
+  <!-- попап увеличенной картики -->
+  <div class="popup popup_big-picture popup_opened" id="popupBigPhoto">
+    <div class="popup__container-big-photo">
+      <button class="popup__close-big-photo" type="button"></button>
+      <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="случайная фотка" class="popup__photo">
+      <p class="popup__photo-name">Архыз</p>
     </div>
   </div>
   <template class="card_template">

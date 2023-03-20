@@ -103,7 +103,7 @@ function handleFormSubmit(evt) {
   closePopup();
 }
 
-//добавление карточек на страницу
+//первое добавление карточек при загрузке на страницу
 initialCards.forEach(renderFirstArrayCards);
 
 function renderFirstArrayCards(card) {
@@ -111,6 +111,7 @@ function renderFirstArrayCards(card) {
   cardsListElement.append(htmlCardElement);
 }
 
+// добавление последующих карточек через форму
 function renderNextCard(card) {
  const htmlCardElement = createCard(card)
   cardsListElement.prepend(htmlCardElement);
