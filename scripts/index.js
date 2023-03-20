@@ -94,7 +94,7 @@ function handleFormSubmit(evt) {
     const card = {};
     card.name = titleFormFieldElement.value;
     card.link = linkFormFieldElement.value;
-    renderCard(card);
+    renderNextCard(card);
 
     titleFormFieldElement.value = '';
     linkFormFieldElement.value = '';
@@ -103,23 +103,26 @@ function handleFormSubmit(evt) {
   closePopup();
 }
 
-//добавление карточек на страницу и лайки
+//добавление карточек на страницу
 initialCards.forEach(renderFirstArrayCards);
 
 function renderFirstArrayCards(card) {
-  const htmlCardElement = cardTemplateElement.cloneNode(true);
-  htmlCardElement.querySelector('.card__name').textContent = card.name;
-  htmlCardElement.querySelector('.card__photo').src = card.link;
-  setHtmlEventListeners(htmlCardElement);
+  const htmlCardElement = createCard(card)
   cardsListElement.append(htmlCardElement);
 }
 
-function renderCard(card) {
+function renderNextCard(card) {
+ const htmlCardElement = createCard(card)
+  cardsListElement.prepend(htmlCardElement);
+}
+
+// создание карточки
+function createCard(card) {
   const htmlCardElement = cardTemplateElement.cloneNode(true);
   htmlCardElement.querySelector('.card__name').textContent = card.name;
   htmlCardElement.querySelector('.card__photo').src = card.link;
   setHtmlEventListeners(htmlCardElement);
-  cardsListElement.prepend(htmlCardElement);
+  return htmlCardElement;
 }
 
 // лайки
@@ -131,9 +134,7 @@ function handleLikeCard(evt) {
 // удаление карточки
 function handleDelite(evt) {
   evt.preventDefault();
-
-  const card = evt.target.closest('.card');
-  card.remove();
+  evt.target.closest('.card').remove();
 }
 
 // ф-ция слушателей карточки
