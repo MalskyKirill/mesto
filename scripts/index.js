@@ -110,9 +110,7 @@ function renderFirstArrayCards(card) {
   const htmlCardElement = cardTemplateElement.cloneNode(true);
   htmlCardElement.querySelector('.card__name').textContent = card.name;
   htmlCardElement.querySelector('.card__photo').src = card.link;
-  htmlCardElement
-    .querySelector('.card__like')
-    .addEventListener('click', likeCardClickHandler);
+  setHtmlEventListeners(htmlCardElement);
   cardsListElement.append(htmlCardElement);
 }
 
@@ -120,16 +118,28 @@ function renderCard(card) {
   const htmlCardElement = cardTemplateElement.cloneNode(true);
   htmlCardElement.querySelector('.card__name').textContent = card.name;
   htmlCardElement.querySelector('.card__photo').src = card.link;
-  htmlCardElement
-    .querySelector('.card__like')
-    .addEventListener('click', likeCardClickHandler);
+  setHtmlEventListeners(htmlCardElement);
   cardsListElement.prepend(htmlCardElement);
 }
 
 // лайки
-function likeCardClickHandler(evt) {
+function handleLikeCard(evt) {
   evt.preventDefault();
   evt.target.classList.toggle('card__like_active');
+}
+
+// удаление карточки
+function handleDelite(evt) {
+  evt.preventDefault();
+
+  const card = evt.target.closest('.card');
+  card.remove();
+}
+
+// ф-ция слушателей карточки
+function setHtmlEventListeners(card) {
+  card.querySelector('.card__like').addEventListener('click', handleLikeCard);
+  card.querySelector('.card__trash').addEventListener('click', handleDelite);
 }
 
 // слушатели событий
