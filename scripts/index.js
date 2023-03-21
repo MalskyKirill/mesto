@@ -116,7 +116,7 @@ function handleFormSubmit(evt) {
     linkFormFieldElement.value = '';
   }
 
-  closePopup();
+  closePopupForm();
 }
 
 //первое добавление карточек при загрузке на страницу
