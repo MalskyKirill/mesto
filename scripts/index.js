@@ -32,11 +32,14 @@ const popupBigPhotoElement = document.querySelector('#popupBigPhoto');
 const openProfileBtnElement = document.querySelector('.profile__edit-button');
 const openNewPlaceBtnElement = document.querySelector('.profile__add-button');
 
-const closeBtnElements = document.querySelectorAll('.popup__close');
-const closeBtnPopupProfileElement = document.querySelector('#closePopupProfile');
-const closeBtnPopupNewPlaceElement = document.querySelector('#closePopupNewPlase');
-const closeBtnPopupBigPhotoElement = document.querySelector('.popup__close-big-photo');
-
+const closeBtnPopupProfileElement =
+  document.querySelector('#closePopupProfile');
+const closeBtnPopupNewPlaceElement = document.querySelector(
+  '#closePopupNewPlase'
+);
+const closeBtnPopupBigPhotoElement = document.querySelector(
+  '.popup__close-big-photo'
+);
 
 const formProfileElement = document.querySelector('#profileField');
 const formNewPlaceElement = document.querySelector('#newPlaceField');
@@ -70,13 +73,13 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
-function openPopupFormProfile() {
+function openPopupProfile() {
   openPopup(popupProfileElement);
   nameFormFieldElement.value = profileName.textContent;
   jobFormFieldElement.value = profileJob.textContent;
 }
 
-function openPopupFormNewPlace() {
+function openPopupNewPlace() {
   openPopup(popupNewPlaceElement);
 }
 
@@ -88,39 +91,36 @@ function openPopupBigPicture(evt) {
   document.querySelector('.popup__photo-name').textContent = evt.target.alt;
 }
 
-function closePopupFormProfile() {
+function closePopupProfile() {
   closePopup(popupProfileElement);
 }
 
-function closePopupFormNewPlace() {
+function closePopupNewPlace() {
   closePopup(popupNewPlaceElement);
+  formNewPlaceElement.reset();
 }
 
 function closePopupBigPicture() {
   closePopup(popupBigPhotoElement);
 }
 
-// редактирование формы при сохранении профиля и добавлении карточек
-function handleFormSubmit(evt) {
+function handleFormProfile(evt) {
   evt.preventDefault();
-  const target = evt.target;
 
-  if (target === formProfileElement) {
-    profileName.textContent = nameFormFieldElement.value;
-    profileJob.textContent = jobFormFieldElement.value;
-  }
+  profileName.textContent = nameFormFieldElement.value;
+  profileJob.textContent = jobFormFieldElement.value;
+  closePopupProfile();
+}
 
-  if (target === formNewPlaceElement) {
-    const card = {};
-    card.name = titleFormFieldElement.value;
-    card.link = linkFormFieldElement.value;
-    renderNextCard(card);
+function handleFormNextPlase(evt) {
+  evt.preventDefault();
 
-    titleFormFieldElement.value = '';
-    linkFormFieldElement.value = '';
-  }
+  const card = {};
+  card.name = titleFormFieldElement.value;
+  card.link = linkFormFieldElement.value;
 
-  closePopup();
+  renderNextCard(card);
+  closePopupNewPlace();
 }
 
 //первое добавление карточек при загрузке на страницу
@@ -169,14 +169,14 @@ function setHtmlEventListeners(card) {
 }
 
 // слушатели событий
-openProfileBtnElement.addEventListener('click', openPopupFormProfile);
-openNewPlaceBtnElement.addEventListener('click', openPopupFormNewPlace);
+openProfileBtnElement.addEventListener('click', openPopupProfile);
+openNewPlaceBtnElement.addEventListener('click', openPopupNewPlace);
 
-closeBtnPopupProfileElement.addEventListener('click', closePopupFormProfile)
-closeBtnPopupNewPlaceElement.addEventListener('click', closePopupFormNewPlace)
-closeBtnPopupBigPhotoElement.addEventListener('click', closePopupBigPicture)
+closeBtnPopupProfileElement.addEventListener('click', closePopupProfile);
+closeBtnPopupNewPlaceElement.addEventListener('click', closePopupNewPlace);
+closeBtnPopupBigPhotoElement.addEventListener('click', closePopupBigPicture);
 
 // popupElement.addEventListener('click', closePopupByClickOnOverlay);
 
-formProfileElement.addEventListener('submit', handleFormSubmit);
-formNewPlaceElement.addEventListener('submit', handleFormSubmit);
+formProfileElement.addEventListener('submit', handleFormProfile);
+formNewPlaceElement.addEventListener('submit', handleFormNextPlase);
