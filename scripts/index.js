@@ -31,7 +31,12 @@ const popupBigPhotoElement = document.querySelector('#popupBigPhoto');
 
 const openProfileBtnElement = document.querySelector('.profile__edit-button');
 const openNewPlaceBtnElement = document.querySelector('.profile__add-button');
+
 const closeBtnElements = document.querySelectorAll('.popup__close');
+const closeBtnPopupProfileElement = document.querySelector('#closePopupProfile');
+const closeBtnPopupNewPlaceElement = document.querySelector('#closePopupNewPlase');
+const closeBtnPopupBigPhotoElement = document.querySelector('.popup__close-big-photo');
+
 
 const formProfileElement = document.querySelector('#profileField');
 const formNewPlaceElement = document.querySelector('#newPlaceField');
@@ -61,25 +66,9 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-function closePopup(evt) {
-  evt.target.closest('.popup').classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
-
-// function openPopupForm(evt) {
-//   evt.preventDefault();
-//   const target = evt.target;
-
-//   console.log(document.querySelectorAll('.card__photo'));
-//   if (target === openProfileBtnElement) {
-//     popupProfileElement.classList.add('popup_opened');
-//     nameFormFieldElement.value = profileName.textContent;
-//     jobFormFieldElement.value = profileJob.textContent;
-//   }
-
-//   if (target === openNewPlaceBtnElement) {
-//     popupNewPlaceElement.classList.add('popup_opened');
-//   }
-// }
 
 function openPopupFormProfile() {
   openPopup(popupProfileElement);
@@ -97,6 +86,18 @@ function openPopupBigPicture(evt) {
   document.querySelector('.popup__photo').src = evt.target.src;
   document.querySelector('.popup__photo').alt = evt.target.alt;
   document.querySelector('.popup__photo-name').textContent = evt.target.alt;
+}
+
+function closePopupFormProfile() {
+  closePopup(popupProfileElement);
+}
+
+function closePopupFormNewPlace() {
+  closePopup(popupNewPlaceElement);
+}
+
+function closePopupBigPicture() {
+  closePopup(popupBigPhotoElement);
 }
 
 // редактирование формы при сохранении профиля и добавлении карточек
@@ -119,7 +120,7 @@ function handleFormSubmit(evt) {
     linkFormFieldElement.value = '';
   }
 
-  closePopupForm();
+  closePopup();
 }
 
 //первое добавление карточек при загрузке на страницу
@@ -171,12 +172,10 @@ function setHtmlEventListeners(card) {
 openProfileBtnElement.addEventListener('click', openPopupFormProfile);
 openNewPlaceBtnElement.addEventListener('click', openPopupFormNewPlace);
 
-closeBtnElements.forEach((btn) =>
-  btn.addEventListener('click', closePopup)
-);
-document
-  .querySelector('.popup__container-big-photo')
-  .addEventListener('click', closePopup);
+closeBtnPopupProfileElement.addEventListener('click', closePopupFormProfile)
+closeBtnPopupNewPlaceElement.addEventListener('click', closePopupFormNewPlace)
+closeBtnPopupBigPhotoElement.addEventListener('click', closePopupBigPicture)
+
 // popupElement.addEventListener('click', closePopupByClickOnOverlay);
 
 formProfileElement.addEventListener('submit', handleFormSubmit);
