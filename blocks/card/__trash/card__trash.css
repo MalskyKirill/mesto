@@ -12,3 +12,8 @@
   right: 20px;
   cursor: pointer;
 }
+
+.card__trash:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
