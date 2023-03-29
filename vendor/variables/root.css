@@ -7,6 +7,8 @@
   --white: #FFFFFF;
   --black: #000000;
   --gray: #545454;
+  --red: #FF0000;
+  --placeholder-color: #C4C4C4;
 
   /* typography */
   --family: 'Inter', arial, sans-serif;
