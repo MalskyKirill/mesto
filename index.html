@@ -40,17 +40,19 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button class="popup__close" type="button" id="closePopupProfile"></button>
-      <form class="popup__form" id="profileField" name="popupForm">
+      <form class="popup__form" id="profileField" name="popupForm" novalidate>
         <label class="popup__field-wrap">
-          <input type="text" class="popup__field popup__field_next_name" placeholder="Имя" name="name">
-          <span class="popup__field-error">ошибка</span>
+          <input id="name" type="text" class="popup__field popup__field_next_name" placeholder="Имя" name="name"
+            minlength="2" maxlength="40" required>
+          <span class="popup__field-error popup__field-error-name"></span>
         </label>
         <label class="popup__field-wrap">
-          <input type="text" class="popup__field popup__field_next_job" placeholder="Вид деятельности" name="job">
-          <span class="popup__field-error">ошибка</span>
+          <input id="job" type="text" class="popup__field popup__field_next_job" placeholder="Вид деятельности"
+            name="job" minlength="2" maxlength="200" required>
+          <span class="popup__field-error popup__field-error-job">ошибка профайла</span>
         </label>
+        <button class="popup__save" type="submit" form="profileField">Сохранить</button>
       </form>
-      <button class="popup__save" type="submit" form="profileField">Сохранить</button>
     </div>
   </div>
   <!-- попап добавления новой карточки -->
@@ -58,17 +60,19 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <button class="popup__close" type="button" id="closePopupNewPlase"></button>
-      <form class="popup__form" id="newPlaceField" name="popupForm">
+      <form class="popup__form" id="newPlaceField" name="popupForm" novalidate>
         <label class="popup__field-wrap">
-          <input type="text" class="popup__field popup__field_next_title" placeholder="Название" name="title">
-          <span class="popup__field-error">ошибка</span>
+          <input id="title" type="text" class="popup__field popup__field_next_title" placeholder="Название" name="title"
+            minlength="2" maxlength="30" required>
+          <span class="popup__field-error popup__field-error-title">ошибка имени карточки</span>
         </label>
         <label class="popup__field-wrap">
-          <input type="text" class="popup__field popup__field_next_link" placeholder="Ссылка на картинку" name="link">
-          <span class="popup__field-error">ошибка</span>
+          <input id="link" type="url" class="popup__field popup__field_next_link" placeholder="Ссылка на картинку"
+            name="link" required>
+          <span class="popup__field-error popup__field-error-link">ошибка юрл адреса</span>
         </label>
+        <button class="popup__save" type="submit" form="newPlaceField">Создать</button>
       </form>
-      <button class="popup__save popup__save_disabled" type="submit" form="newPlaceField">Создать</button>
     </div>
   </div>
   <!-- попап увеличенной картики -->
