@@ -54,11 +54,15 @@ function openPopupProfile() {
   nameFormFieldElement.value = profileName.textContent;
   jobFormFieldElement.value = profileJob.textContent;
 
+  document.addEventListener('keydown', closePopupByPushEsc);
+
   enableValidation(validationConfig);
 }
 
 function openPopupNewPlace() {
   openPopup(popupNewPlaceElement);
+
+  document.addEventListener('keydown', closePopupByPushEsc);
 
   enableValidation(validationConfig);
 }
@@ -69,10 +73,14 @@ function openPopupBigPicture(evt) {
   popupImgElement.src = evt.target.src;
   popupImgElement.alt = evt.target.alt;
   popupNameElement.textContent = evt.target.alt;
+
+  document.addEventListener('keydown', closePopupByPushEsc);
 }
 
 function closePopupProfile() {
   closePopup(popupProfileElement);
+
+  document.removeEventListener('keydown', closePopupByPushEsc);
 
   hideInputFieldError(
     popupProfileElement,
@@ -90,6 +98,8 @@ function closePopupNewPlace() {
   closePopup(popupNewPlaceElement);
   formNewPlaceElement.reset();
 
+  document.removeEventListener('keydown', closePopupByPushEsc);
+
   hideInputFieldError(
     popupNewPlaceElement,
     titleFormFieldElement,
@@ -104,6 +114,8 @@ function closePopupNewPlace() {
 
 function closePopupBigPicture() {
   closePopup(popupBigPhotoElement);
+
+  document.removeEventListener('keydown', closePopupByPushEsc);
 }
 
 // закрытие попапов по клику на оверлей
@@ -124,6 +136,7 @@ function closePopupBigPictureByClickOnOverlay(evt) {
 
 // закрытые попапов по нажантию на Esc
 function closePopupByPushEsc(evt) {
+  console.log(1)
   if (evt.key !== 'Escape') return;
   closePopupProfile();
   closePopupNewPlace();
@@ -215,4 +228,4 @@ popupProfileElement.addEventListener('click', closePopupProfileByClickOnOverlay)
 popupNewPlaceElement.addEventListener('click', closePopupNewPlaceByClickOnOverlay);
 popupBigPhotoElement.addEventListener('click', closePopupBigPictureByClickOnOverlay);
 
-document.addEventListener('keydown', closePopupByPushEsc);
+
