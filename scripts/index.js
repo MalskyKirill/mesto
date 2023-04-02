@@ -2,15 +2,15 @@ const popupProfileElement = document.querySelector('#popupProfile');
 const popupNewPlaceElement = document.querySelector('#popupNewPlace');
 const popupBigPhotoElement = document.querySelector('#popupBigPhoto');
 
-const openProfileBtnElement = document.querySelector('.profile__edit-button');
-const openNewPlaceBtnElement = document.querySelector('.profile__add-button');
+const btnOpenPopupProfileElement = document.querySelector('.profile__edit-button');
+const btnOpenPopupNewPlaceElement = document.querySelector('.profile__add-button');
 
-const closeBtnPopupProfileElement =
+const btnClosePopupProfileElement =
   document.querySelector('#closePopupProfile');
-const closeBtnPopupNewPlaceElement = document.querySelector(
+const btnClosePopupNewPlaceElement = document.querySelector(
   '#closePopupNewPlase'
 );
-const closeBtnPopupBigPhotoElement = document.querySelector(
+const btnClosePopupBigPhotoElement = document.querySelector(
   '.popup__close-big-photo'
 );
 
@@ -201,12 +201,12 @@ function setHtmlEventListeners(card) {
 }
 
 // слушатели событий
-openProfileBtnElement.addEventListener('click', openPopupProfile);
-openNewPlaceBtnElement.addEventListener('click', openPopupNewPlace);
+btnOpenPopupProfileElement.addEventListener('click', openPopupProfile);
+btnOpenPopupNewPlaceElement.addEventListener('click', openPopupNewPlace);
 
-closeBtnPopupProfileElement.addEventListener('click', closePopupProfile);
-closeBtnPopupNewPlaceElement.addEventListener('click', closePopupNewPlace);
-closeBtnPopupBigPhotoElement.addEventListener('click', closePopupBigPicture);
+btnClosePopupProfileElement.addEventListener('click', closePopupProfile);
+btnClosePopupNewPlaceElement.addEventListener('click', closePopupNewPlace);
+btnClosePopupBigPhotoElement.addEventListener('click', closePopupBigPicture);
 
 formProfileElement.addEventListener('submit', handleFormProfile);
 formNewPlaceElement.addEventListener('submit', handleFormNextPlase);
