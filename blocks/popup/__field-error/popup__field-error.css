@@ -4,7 +4,8 @@
   color: var(--red);
   position: absolute;
   opacity: 0;
-  top: calc(100% + 5px);
+  top: 33px;
   left: 0;
   transition: 0.3s;
+  z-index: 999;
 }

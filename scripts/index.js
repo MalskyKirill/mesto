@@ -53,10 +53,14 @@ function openPopupProfile() {
   openPopup(popupProfileElement);
   nameFormFieldElement.value = profileName.textContent;
   jobFormFieldElement.value = profileJob.textContent;
+
+  enableValidation(validationConfig);
 }
 
 function openPopupNewPlace() {
   openPopup(popupNewPlaceElement);
+
+  enableValidation(validationConfig);
 }
 
 function openPopupBigPicture(evt) {
@@ -69,11 +73,33 @@ function openPopupBigPicture(evt) {
 
 function closePopupProfile() {
   closePopup(popupProfileElement);
+
+  hideInputFieldError(
+    popupProfileElement,
+    nameFormFieldElement,
+    validationConfig
+  );
+  hideInputFieldError(
+    popupProfileElement,
+    jobFormFieldElement,
+    validationConfig
+  );
 }
 
 function closePopupNewPlace() {
   closePopup(popupNewPlaceElement);
   formNewPlaceElement.reset();
+
+  hideInputFieldError(
+    popupNewPlaceElement,
+    titleFormFieldElement,
+    validationConfig
+  );
+  hideInputFieldError(
+    popupNewPlaceElement,
+    linkFormFieldElement,
+    validationConfig
+  );
 }
 
 function closePopupBigPicture() {
@@ -160,78 +186,3 @@ closeBtnPopupBigPhotoElement.addEventListener('click', closePopupBigPicture);
 
 formProfileElement.addEventListener('submit', handleFormProfile);
 formNewPlaceElement.addEventListener('submit', handleFormNextPlase);
-
-// валидация форм
-function showInputFieldError(formElement, inputElement, errorMessage) {
-  const errorElement = formElement.querySelector(
-    `.popup__field-error-${inputElement.id}`
-  );
-
-  inputElement.classList.add('popup__field_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__field-error_visible');
-}
-
-function hideInputFieldError(formElement, inputElement) {
-  const errorElement = formElement.querySelector(
-    `.popup__field-error-${inputElement.id}`
-  );
-
-  inputElement.classList.remove('popup__field_type_error');
-  errorElement.classList.remove('popup__field-error_visible');
-  errorElement.textContent = '';
-}
-
-function isValideForm(formElement, inputElement) {
-  console.log();
-  if (!inputElement.validity.valid) {
-    showInputFieldError(
-      formElement,
-      inputElement,
-      inputElement.validationMessage
-    );
-  } else {
-    hideInputFieldError(formElement, inputElement);
-  }
-}
-
-function setFormEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__field'));
-  const buttonElement = formElement.querySelector('.popup__save');
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      isValideForm(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-}
-
-function enableValidation({popupSelector}) {
-  const popupList = Array.from(document.querySelectorAll(popupSelector));
-
-  popupList.forEach((popupElement) => {
-    setFormEventListeners(popupElement);
-  });
-}
-
-function hasInvalidInput(inputList) {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-}
-
-function toggleButtonState(inputList, buttonElement) {
-  //console.log();
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__save_disabled');
-  } else {
-    buttonElement.classList.remove('popup__save_disabled');
-  }
-}
-
-enableValidation({
-  popupSelector: '.popup__container',
-  inactiveButtonClass: 'popup__button_disabled',
-});
