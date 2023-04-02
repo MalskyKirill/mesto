@@ -106,6 +106,31 @@ function closePopupBigPicture() {
   closePopup(popupBigPhotoElement);
 }
 
+// закрытие попапов по клику на оверлей
+function closePopupProfileByClickOnOverlay(evt) {
+  if (evt.target !== evt.currentTarget) return;
+  closePopupProfile();
+}
+
+function closePopupNewPlaceByClickOnOverlay(evt) {
+  if (evt.target !== evt.currentTarget) return;
+  closePopupNewPlace();
+}
+
+function closePopupBigPictureByClickOnOverlay(evt) {
+  if (evt.target !== evt.currentTarget) return;
+  closePopupBigPicture();
+}
+
+// закрытые попапов по нажантию на Esc
+function closePopupByPushEsc(evt) {
+  if (evt.key !== 'Escape') return;
+  closePopupProfile();
+  closePopupNewPlace();
+  closePopupBigPicture();
+}
+
+// редактирование формы профиля
 function handleFormProfile(evt) {
   evt.preventDefault();
 
@@ -114,6 +139,7 @@ function handleFormProfile(evt) {
   closePopupProfile();
 }
 
+// форма доюавления карточки
 function handleFormNextPlase(evt) {
   evt.preventDefault();
 
@@ -182,7 +208,11 @@ closeBtnPopupProfileElement.addEventListener('click', closePopupProfile);
 closeBtnPopupNewPlaceElement.addEventListener('click', closePopupNewPlace);
 closeBtnPopupBigPhotoElement.addEventListener('click', closePopupBigPicture);
 
-// popupElement.addEventListener('click', closePopupByClickOnOverlay);
-
 formProfileElement.addEventListener('submit', handleFormProfile);
 formNewPlaceElement.addEventListener('submit', handleFormNextPlase);
+
+popupProfileElement.addEventListener('click', closePopupProfileByClickOnOverlay);
+popupNewPlaceElement.addEventListener('click', closePopupNewPlaceByClickOnOverlay);
+popupBigPhotoElement.addEventListener('click', closePopupBigPictureByClickOnOverlay);
+
+document.addEventListener('keydown', closePopupByPushEsc);
