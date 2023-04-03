@@ -136,11 +136,9 @@ function closePopupBigPictureByClickOnOverlay(evt) {
 
 // закрытые попапов по нажантию на Esc
 function closePopupByPushEsc(evt) {
-  console.log(1)
   if (evt.key !== 'Escape') return;
-  closePopupProfile();
-  closePopupNewPlace();
-  closePopupBigPicture();
+  closePopup(document.querySelector('.popup_opened'))
+
 }
 
 // редактирование формы профиля
