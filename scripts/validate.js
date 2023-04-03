@@ -31,11 +31,12 @@ function hideInputFieldError(
   errorElement.textContent = '';
 }
 
-function hideValidationErrors(formElement, validationConfig) {
-  const inputElements = form.querySelectorAll('.popup__field');
+// поиск инпутов для скрытия сообщения об ошибки
+function hideValidationErrors(formElement, { inputSelector, ...rest }) {
+  const inputElements = formElement.querySelectorAll(inputSelector);
 
   inputElements.forEach((input) =>
-    hideInputFieldError(formElement, input, validationConfig)
+    hideInputFieldError(formElement, input, rest)
   );
 }
 
@@ -91,7 +92,18 @@ function hasInvalidInput(inputList) {
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.setAttribute('disabled', true);
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.removeAttribute('disabled');
   }
+}
+
+function validationToggleButtonState(
+  popupElement,
+  { inputSelector, submitButtonSelector, inactiveButtonClass }
+) {
+  const inputList = Array.from(popupElement.querySelectorAll(inputSelector));
+  const buttonElement = popupElement.querySelector(submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 }

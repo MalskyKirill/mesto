@@ -62,6 +62,7 @@ function openPopupProfile() {
   jobFormFieldElement.value = profileJob.textContent;
 
   hideValidationErrors(popupProfileElement, validationConfig);
+  validationToggleButtonState(popupProfileElement, validationConfig);
   document.addEventListener('keydown', closePopupByPushEsc);
 }
 
@@ -70,6 +71,7 @@ function openPopupNewPlace() {
   formNewPlaceElement.reset();
 
   hideValidationErrors(popupNewPlaceElement, validationConfig);
+  validationToggleButtonState(popupNewPlaceElement, validationConfig);
   document.addEventListener('keydown', closePopupByPushEsc);
 }
 
