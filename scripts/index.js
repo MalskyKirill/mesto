@@ -2,6 +2,8 @@ const popupProfileElement = document.querySelector('#popupProfile');
 const popupNewPlaceElement = document.querySelector('#popupNewPlace');
 const popupBigPhotoElement = document.querySelector('#popupBigPhoto');
 
+const popupElements = document.querySelectorAll('.popup');
+
 const btnOpenPopupProfileElement = document.querySelector('.profile__edit-button');
 const btnOpenPopupNewPlaceElement = document.querySelector('.profile__add-button');
 
@@ -43,10 +45,12 @@ const popupNameElement =
 // открытие-закрытие попапов
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByPushEsc);
 }
 
 function openPopupProfile() {
@@ -55,16 +59,13 @@ function openPopupProfile() {
   jobFormFieldElement.value = profileJob.textContent;
 
   document.addEventListener('keydown', closePopupByPushEsc);
-
-  enableValidation(validationConfig);
 }
 
 function openPopupNewPlace() {
   openPopup(popupNewPlaceElement);
+  formNewPlaceElement.reset();
 
   document.addEventListener('keydown', closePopupByPushEsc);
-
-  enableValidation(validationConfig);
 }
 
 function openPopupBigPicture(evt) {
@@ -79,66 +80,26 @@ function openPopupBigPicture(evt) {
 
 function closePopupProfile() {
   closePopup(popupProfileElement);
-
-  document.removeEventListener('keydown', closePopupByPushEsc);
-
-  hideInputFieldError(
-    popupProfileElement,
-    nameFormFieldElement,
-    validationConfig
-  );
-  hideInputFieldError(
-    popupProfileElement,
-    jobFormFieldElement,
-    validationConfig
-  );
 }
 
 function closePopupNewPlace() {
   closePopup(popupNewPlaceElement);
-  formNewPlaceElement.reset();
-
-  document.removeEventListener('keydown', closePopupByPushEsc);
-
-  hideInputFieldError(
-    popupNewPlaceElement,
-    titleFormFieldElement,
-    validationConfig
-  );
-  hideInputFieldError(
-    popupNewPlaceElement,
-    linkFormFieldElement,
-    validationConfig
-  );
 }
 
 function closePopupBigPicture() {
   closePopup(popupBigPhotoElement);
-
-  document.removeEventListener('keydown', closePopupByPushEsc);
 }
 
 // закрытие попапов по клику на оверлей
-function closePopupProfileByClickOnOverlay(evt) {
+function closePopupByClickOnOverlay(evt, popup) {
   if (evt.target !== evt.currentTarget) return;
-  closePopupProfile();
-}
-
-function closePopupNewPlaceByClickOnOverlay(evt) {
-  if (evt.target !== evt.currentTarget) return;
-  closePopupNewPlace();
-}
-
-function closePopupBigPictureByClickOnOverlay(evt) {
-  if (evt.target !== evt.currentTarget) return;
-  closePopupBigPicture();
+  closePopup(popup);
 }
 
 // закрытые попапов по нажантию на Esc
 function closePopupByPushEsc(evt) {
   if (evt.key !== 'Escape') return;
   closePopup(document.querySelector('.popup_opened'))
-
 }
 
 // редактирование формы профиля
@@ -219,11 +180,10 @@ btnClosePopupProfileElement.addEventListener('click', closePopupProfile);
 btnClosePopupNewPlaceElement.addEventListener('click', closePopupNewPlace);
 btnClosePopupBigPhotoElement.addEventListener('click', closePopupBigPicture);
 
+popupElements.forEach(popup => popup.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt, popup)))
+
+
 formProfileElement.addEventListener('submit', handleFormProfile);
 formNewPlaceElement.addEventListener('submit', handleFormNextPlase);
 
-popupProfileElement.addEventListener('click', closePopupProfileByClickOnOverlay);
-popupNewPlaceElement.addEventListener('click', closePopupNewPlaceByClickOnOverlay);
-popupBigPhotoElement.addEventListener('click', closePopupBigPictureByClickOnOverlay);
-
-
+enableValidation(validationConfig);
