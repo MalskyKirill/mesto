@@ -31,6 +31,14 @@ function hideInputFieldError(
   errorElement.textContent = '';
 }
 
+function hideValidationErrors(formElement, validationConfig) {
+  const inputElements = form.querySelectorAll('.popup__field');
+
+  inputElements.forEach((input) =>
+    hideInputFieldError(formElement, input, validationConfig)
+  );
+}
+
 // проверка на валидность
 function isValideForm(formElement, inputElement, rest) {
   if (!inputElement.validity.valid) {

@@ -4,8 +4,12 @@ const popupBigPhotoElement = document.querySelector('#popupBigPhoto');
 
 const popupElements = document.querySelectorAll('.popup');
 
-const btnOpenPopupProfileElement = document.querySelector('.profile__edit-button');
-const btnOpenPopupNewPlaceElement = document.querySelector('.profile__add-button');
+const btnOpenPopupProfileElement = document.querySelector(
+  '.profile__edit-button'
+);
+const btnOpenPopupNewPlaceElement = document.querySelector(
+  '.profile__add-button'
+);
 
 const btnClosePopupProfileElement =
   document.querySelector('#closePopupProfile');
@@ -45,7 +49,6 @@ const popupNameElement =
 // открытие-закрытие попапов
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-
 }
 
 function closePopup(popup) {
@@ -58,6 +61,7 @@ function openPopupProfile() {
   nameFormFieldElement.value = profileName.textContent;
   jobFormFieldElement.value = profileJob.textContent;
 
+  hideValidationErrors(popupProfileElement, validationConfig);
   document.addEventListener('keydown', closePopupByPushEsc);
 }
 
@@ -65,6 +69,7 @@ function openPopupNewPlace() {
   openPopup(popupNewPlaceElement);
   formNewPlaceElement.reset();
 
+  hideValidationErrors(popupNewPlaceElement, validationConfig);
   document.addEventListener('keydown', closePopupByPushEsc);
 }
 
@@ -99,7 +104,7 @@ function closePopupByClickOnOverlay(evt, popup) {
 // закрытые попапов по нажантию на Esc
 function closePopupByPushEsc(evt) {
   if (evt.key !== 'Escape') return;
-  closePopup(document.querySelector('.popup_opened'))
+  closePopup(document.querySelector('.popup_opened'));
 }
 
 // редактирование формы профиля
@@ -180,8 +185,11 @@ btnClosePopupProfileElement.addEventListener('click', closePopupProfile);
 btnClosePopupNewPlaceElement.addEventListener('click', closePopupNewPlace);
 btnClosePopupBigPhotoElement.addEventListener('click', closePopupBigPicture);
 
-popupElements.forEach(popup => popup.addEventListener('click', (evt) => closePopupByClickOnOverlay(evt, popup)))
-
+popupElements.forEach((popup) =>
+  popup.addEventListener('click', (evt) =>
+    closePopupByClickOnOverlay(evt, popup)
+  )
+);
 
 formProfileElement.addEventListener('submit', handleFormProfile);
 formNewPlaceElement.addEventListener('submit', handleFormNextPlase);
