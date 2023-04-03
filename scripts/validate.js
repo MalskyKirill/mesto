@@ -41,7 +41,7 @@ function hideValidationErrors(formElement, { inputSelector, ...rest }) {
 }
 
 // проверка на валидность
-function isValideForm(formElement, inputElement, rest) {
+function checkFormValidity(formElement, inputElement, rest) {
   if (!inputElement.validity.valid) {
     showInputFieldError(
       formElement,
@@ -66,7 +66,7 @@ function setFormEventListeners(
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValideForm(formElement, inputElement, rest);
+      checkFormValidity(formElement, inputElement, rest);
       toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     });
   });
