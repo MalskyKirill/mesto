@@ -42,6 +42,7 @@ const popupNameElement =
 // открытие-закрытие попапов
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByPushEsc);
 }
 
 function closePopup(popup) {
@@ -56,7 +57,6 @@ function openPopupProfile() {
 
   hideValidationErrors(popupProfileElement, validationConfig);
   validationToggleButtonState(popupProfileElement, validationConfig);
-  document.addEventListener('keydown', closePopupByPushEsc);
 }
 
 function openPopupNewPlace() {
@@ -65,20 +65,14 @@ function openPopupNewPlace() {
 
   hideValidationErrors(popupNewPlaceElement, validationConfig);
   validationToggleButtonState(popupNewPlaceElement, validationConfig);
-  document.addEventListener('keydown', closePopupByPushEsc);
 }
 
 function openPopupBigPicture(cardName, cardPhoto) {
   openPopup(popupBigPhotoElement);
-  // popupImgElement.src = evt.target.src;
-  // popupImgElement.alt = evt.target.alt;
-  // popupNameElement.textContent = evt.target.alt;
 
-  popupImgElement.src = cardPhoto.src;
-  popupImgElement.alt = cardName.textContent;
-  popupNameElement.textContent = cardName.textContent;
-
-  document.addEventListener('keydown', closePopupByPushEsc);
+  popupImgElement.src = cardPhoto;
+  popupImgElement.alt = cardName;
+  popupNameElement.textContent = cardName;
 }
 
 // закрытие попапов по клику на оверлей
@@ -141,7 +135,7 @@ function createCard(card) {
   cardPhotoElement.alt = card.name;
 
   cardPhotoElement.addEventListener('click', () =>
-    openPopupBigPicture(cardNameElement, cardPhotoElement)
+    openPopupBigPicture(cardNameElement.textContent, cardPhotoElement.src)
   );
   cardLikeElement.addEventListener('click', () =>
     handleLikeCard(cardLikeElement)
@@ -164,23 +158,12 @@ function handleDelete(cardElement) {
   cardElement.closest('.card').remove();
 }
 
-// ф-ция слушателей карточки
-// function setHtmlEventListeners(card) {
-//   card.querySelector('.card__like').addEventListener('click', handleLikeCard);
-//   card.querySelector('.card__trash').addEventListener('click', handleDelite);
-//   card
-//     .querySelector('.card__photo')
-//     .addEventListener('click', openPopupBigPicture);
-// }
-
 // слушатели событий
 btnOpenPopupProfileElement.addEventListener('click', openPopupProfile);
 btnOpenPopupNewPlaceElement.addEventListener('click', openPopupNewPlace);
 
 btnClosePopupElements.forEach((btn) =>
-  btn.addEventListener('click', (evt) =>
-    closePopup(document.querySelector('.popup_opened'))
-  )
+  btn.addEventListener('click', () => closePopup(btn.closest('.popup')))
 );
 popupElements.forEach((popup) =>
   popup.addEventListener('click', (evt) =>

@@ -92,18 +92,18 @@ function hasInvalidInput(inputList) {
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
+    buttonElement.disabled = false;
   }
 }
 
 function validationToggleButtonState(
-  popupElement,
+  formElement,
   { inputSelector, submitButtonSelector, inactiveButtonClass }
 ) {
-  const inputList = Array.from(popupElement.querySelectorAll(inputSelector));
-  const buttonElement = popupElement.querySelector(submitButtonSelector);
+  const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+  const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 }
