@@ -93,7 +93,7 @@ function handleFormProfileSubmit(evt) {
 
   profileName.textContent = nameFormFieldElement.value;
   profileJob.textContent = jobFormFieldElement.value;
-  closePopupProfile();
+  closePopup(popupProfileElement);
 }
 
 // форма доюавления карточки
@@ -105,7 +105,7 @@ function handleAddPlaceFormSubmit(evt) {
   card.link = linkFormFieldElement.value;
 
   prependCard(card);
-  closePopupNewPlace();
+  closePopup(popupNewPlaceElement);
 }
 
 //первое добавление карточек при загрузке на страницу
