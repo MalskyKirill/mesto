@@ -107,3 +107,12 @@ function validationToggleButtonState(
   const buttonElement = formElement.querySelector(submitButtonSelector);
   toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 }
+
+class FormValidator {
+  constructor(validationConfig, form) {
+    this._validationConfig = validationConfig;
+    this.form = form;
+  }
+
+
+}

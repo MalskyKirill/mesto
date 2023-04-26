@@ -1,5 +1,3 @@
-
-
 const popupProfileElement = document.querySelector('#popupProfile');
 const popupNewPlaceElement = document.querySelector('#popupNewPlace');
 const popupBigPhotoElement = document.querySelector('#popupBigPhoto');

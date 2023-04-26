@@ -1,13 +1,17 @@
-import {initialCards} from './consts.js'
+import { openPopup } from './util.js';
 
 class CardList {
   constructor(containerSelector) {
     this._container = document.querySelector(containerSelector);
   }
 
-  // добавляем карточку в список
-  addCard(card) {
+  // добавляем карточку в конец списка
+  addAppendCard(card) {
     this._container.append(card);
+  }
+  // добавляем карточку в начало списка
+  addPrependCard(card) {
+    this._container.prepend(card);
   }
 }
 
@@ -36,14 +40,9 @@ class Card {
     this.classList.toggle('card__like_active');
   }
 
-  // открываем попап
-  _onOpenPopup(popup) {
-    popup.classList.add('popup_opened');
-    //document.addEventListener('keydown', this._closePopupByPushEsc);
-  }
-
+  // открываем попап с картинкой
   _openPopupBigPicture(cardName, cardPhoto) {
-    this._onOpenPopup(document.querySelector('#popupBigPhoto'));
+    openPopup(document.querySelector('#popupBigPhoto'));
 
     document.querySelector('.popup__photo').src = cardPhoto;
     document.querySelector('.popup__photo').alt = cardName;
@@ -80,19 +79,4 @@ class Card {
   }
 }
 
-const cardList = new CardList('.cards');
-const cardItem = new Card(initialCards[0], '.card_template');
-const card = cardItem.getCard();
-cardList.addCard(card);
-
-// const renderElements = () => {
-//   initialCards.forEach((item) => {
-//     const cardItem = new Card(item, '.card_template');
-//     const card = cardItem.getCard();
-//     cardList.addCard(card);
-//   });
-// };
-
-// renderElements();
-
-
+export { Card, CardList };
