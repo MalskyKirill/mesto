@@ -1,5 +1,6 @@
 import { initialCards, validationConfig } from './consts.js';
-import { Card, CardList } from './card.js';
+import { Card, CardList } from './Card.js';
+import FormValidator from './FormValidation.js'
 import { openPopup, closePopup } from './util.js';
 
 const popupProfileElement = document.querySelector('#popupProfile');
@@ -40,16 +41,16 @@ function openPopupProfile() {
   nameFormFieldElement.value = profileName.textContent;
   jobFormFieldElement.value = profileJob.textContent;
 
-  hideValidationErrors(popupProfileElement, validationConfig);
-  validationToggleButtonState(popupProfileElement, validationConfig);
+  const profileFormValidation = new FormValidator(validationConfig, popupProfileElement);
+  profileFormValidation.enableValidation();
 }
 
 function openPopupNewPlace() {
   openPopup(popupNewPlaceElement);
   formNewPlaceElement.reset();
 
-  hideValidationErrors(popupNewPlaceElement, validationConfig);
-  validationToggleButtonState(popupNewPlaceElement, validationConfig);
+  const newPlaseFormValidator = new FormValidator(validationConfig, popupNewPlaceElement);
+  newPlaseFormValidator.enableValidation()
 }
 
 // закрытие попапов по клику на оверлей
@@ -96,6 +97,7 @@ const renderElements = () => {
 
 renderElements();
 
+
 // слушатели событий
 btnOpenPopupProfileElement.addEventListener('click', openPopupProfile);
 btnOpenPopupNewPlaceElement.addEventListener('click', openPopupNewPlace);
@@ -112,4 +114,4 @@ popupElements.forEach((popup) =>
 formProfileElement.addEventListener('submit', handleFormProfileSubmit);
 formNewPlaceElement.addEventListener('submit', handleAddPlaceFormSubmit);
 
-enableValidation(validationConfig);
+// enableValidation(validationConfig);
