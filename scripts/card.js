@@ -1,20 +1,5 @@
 import { openPopup } from './util.js';
 
-class CardList {
-  constructor(containerSelector) {
-    this._container = document.querySelector(containerSelector);
-  }
-
-  // добавляем карточку в конец списка
-  addAppendCard(card) {
-    this._container.append(card);
-  }
-  // добавляем карточку в начало списка
-  addPrependCard(card) {
-    this._container.prepend(card);
-  }
-}
-
 class Card {
   constructor(data, templateSelector) {
     this._title = data.name;
@@ -57,6 +42,10 @@ class Card {
     this._card.querySelector('.card__photo').src = this._image;
     this._card.querySelector('.card__photo').alt = this._title;
 
+    this._setCardEventListeners();
+  }
+
+  _setCardEventListeners() {
     this._card
       .querySelector('.card__trash')
       .addEventListener('click', this._onDelite.bind(this));
@@ -79,4 +68,4 @@ class Card {
   }
 }
 
-export { Card, CardList };
+export default Card;

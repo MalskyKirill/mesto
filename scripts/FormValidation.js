@@ -68,7 +68,7 @@ class FormValidator {
 
     this._toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 
-    this._hideValidationErrors(this._form, this._validationConfig)
+    this._hideValidationErrors(this._form, this._validationConfig);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
@@ -110,7 +110,6 @@ class FormValidator {
   // запуск валидации формы
   enableValidation() {
     this._setFormEventListeners(this._form, this._validationConfig);
-
   }
 }
 
