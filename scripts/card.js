@@ -1,10 +1,10 @@
-import { openPopup } from './util.js';
-
 class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._title = data.name;
     this._image = data.link;
+
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   // клонируем элемент из разметки
@@ -25,27 +25,21 @@ class Card {
     this.classList.toggle('card__like_active');
   }
 
-  // открываем попап с картинкой
-  _openPopupBigPicture(cardName, cardPhoto) {
-    openPopup(document.querySelector('#popupBigPhoto'));
-
-    document.querySelector('.popup__photo').src = cardPhoto;
-    document.querySelector('.popup__photo').alt = cardName;
-    document.querySelector('.popup__photo-name').textContent = cardName;
-  }
-
   // создаем карточку
   _createCard() {
     this._card = this._getTemalate();
 
-    this._card.querySelector('.card__name').textContent = this._title;
-    this._card.querySelector('.card__photo').src = this._image;
-    this._card.querySelector('.card__photo').alt = this._title;
-
     this._setCardEventListeners();
+
+    this._cardTitle.textContent = this._title;
+    this._cardImage.src = this._image;
+    this._cardImage.alt = this._title;
   }
 
   _setCardEventListeners() {
+    this._cardImage = this._card.querySelector('.card__photo');
+    this._cardTitle = this._card.querySelector('.card__name');
+
     this._card
       .querySelector('.card__trash')
       .addEventListener('click', this._onDelite.bind(this));
@@ -53,7 +47,7 @@ class Card {
     this._card
       .querySelector('.card__photo')
       .addEventListener('click', () =>
-        this._openPopupBigPicture(this._title, this._image)
+        this._handleCardClick(this._title, this._image)
       );
 
     this._card

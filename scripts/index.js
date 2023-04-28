@@ -6,6 +6,7 @@ import { openPopup, closePopup } from './util.js';
 
 const popupProfileElement = document.querySelector('#popupProfile');
 const popupNewPlaceElement = document.querySelector('#popupNewPlace');
+const popupBigPictureElement = document.querySelector('#popupBigPhoto');
 
 const popupElements = document.querySelectorAll('.popup');
 
@@ -37,27 +38,50 @@ const linkFormFieldElement = formNewPlaceElement.querySelector(
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
+// создаем контейнер для карточек
+const cardList = new CardList('.cards');
+
+// первоночальная отрисовка карточек в контейнер
+const renderElements = () => {
+  initialCards.forEach((item) => {
+    const cardItem = createCard(item);
+    cardList.addAppendCard(cardItem);
+  });
+};
+
+//экземпляр валидации формы профайла
+const profileFormValidation = new FormValidator(
+  validationConfig,
+  popupProfileElement
+);
+
+//экземпляр валидации формы новой карточки
+const newPlaseFormValidator = new FormValidator(
+  validationConfig,
+  popupNewPlaceElement
+);
+
+//создание карточки
+function createCard(item) {
+  const cardItem = new Card(item, '.card_template', handleCardClick);
+  const cardElemtnt = cardItem.getCard();
+  return cardElemtnt;
+}
+
+//открыие попапов
 function openPopupProfile() {
   openPopup(popupProfileElement);
   nameFormFieldElement.value = profileName.textContent;
   jobFormFieldElement.value = profileJob.textContent;
 
-  const profileFormValidation = new FormValidator(
-    validationConfig,
-    popupProfileElement
-  );
-  profileFormValidation.enableValidation();
+  profileFormValidation.resetValidation();
 }
 
 function openPopupNewPlace() {
   openPopup(popupNewPlaceElement);
   formNewPlaceElement.reset();
 
-  const newPlaseFormValidator = new FormValidator(
-    validationConfig,
-    popupNewPlaceElement
-  );
-  newPlaseFormValidator.enableValidation();
+  newPlaseFormValidator.resetValidation();
 }
 
 // закрытие попапов по клику на оверлей
@@ -75,6 +99,15 @@ function handleFormProfileSubmit(evt) {
   closePopup(popupProfileElement);
 }
 
+// открываем попап с картинкой
+function handleCardClick(cardName, cardPhoto) {
+  document.querySelector('.popup__photo').src = cardPhoto;
+  document.querySelector('.popup__photo').alt = cardName;
+  document.querySelector('.popup__photo-name').textContent = cardName;
+
+  openPopup(popupBigPictureElement);
+}
+
 // форма добавления карточки
 function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault();
@@ -83,26 +116,17 @@ function handleAddPlaceFormSubmit(evt) {
   item.name = titleFormFieldElement.value;
   item.link = linkFormFieldElement.value;
 
-  const cardItem = new Card(item, '.card_template');
-  const card = cardItem.getCard();
-  cardList.addPrependCard(card);
+  const cardItem = createCard(item);
+  cardList.addPrependCard(cardItem);
 
   closePopup(popupNewPlaceElement);
 }
 
-// создаем контейнер для карточек
-const cardList = new CardList('.cards');
-
-// первоночальная отрисовка карточек в контейнер
-const renderElements = () => {
-  initialCards.forEach((item) => {
-    const cardItem = new Card(item, '.card_template');
-    const card = cardItem.getCard();
-    cardList.addAppendCard(card);
-  });
-};
-
+//отрисовка элементов и запуск валидации форм
 renderElements();
+profileFormValidation.enableValidation();
+newPlaseFormValidator.enableValidation();
+
 
 // слушатели событий
 btnOpenPopupProfileElement.addEventListener('click', openPopupProfile);
@@ -119,5 +143,3 @@ popupElements.forEach((popup) =>
 
 formProfileElement.addEventListener('submit', handleFormProfileSubmit);
 formNewPlaceElement.addEventListener('submit', handleAddPlaceFormSubmit);
-
-// enableValidation(validationConfig);
