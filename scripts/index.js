@@ -38,6 +38,9 @@ const linkFormFieldElement = formNewPlaceElement.querySelector(
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
+const bigPictureImg = document.querySelector('.popup__photo');
+const bigPictureName = document.querySelector('.popup__photo-name');
+
 // создаем контейнер для карточек
 const cardList = new CardList('.cards');
 
@@ -101,9 +104,9 @@ function handleFormProfileSubmit(evt) {
 
 // открываем попап с картинкой
 function handleCardClick(cardName, cardPhoto) {
-  document.querySelector('.popup__photo').src = cardPhoto;
-  document.querySelector('.popup__photo').alt = cardName;
-  document.querySelector('.popup__photo-name').textContent = cardName;
+  bigPictureImg.src = cardPhoto;
+  bigPictureImg.alt = cardName;
+  bigPictureName.textContent = cardName;
 
   openPopup(popupBigPictureElement);
 }
