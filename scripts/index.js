@@ -1,6 +1,7 @@
 import { initialCards, validationConfig } from './consts.js';
 import Card from './Card.js';
 import CardList from './CardList.js';
+import Section from './Section.js';
 import FormValidator from './FormValidation.js';
 import { openPopup, closePopup } from './util.js';
 
@@ -41,16 +42,28 @@ const profileJob = document.querySelector('.profile__job');
 const bigPictureImg = document.querySelector('.popup__photo');
 const bigPictureName = document.querySelector('.popup__photo-name');
 
-// создаем контейнер для карточек
-const cardList = new CardList('.cards');
+// // создаем контейнер для карточек
+// const cardList = new CardList('.cards');
 
-// первоночальная отрисовка карточек в контейнер
-const renderElements = () => {
-  initialCards.forEach((item) => {
-    const cardItem = createCard(item);
-    cardList.addAppendCard(cardItem);
-  });
-};
+// // первоночальная отрисовка карточек в контейнер
+// const renderElements = () => {
+//   initialCards.forEach((item) => {
+//     const cardItem = createCard(item);
+//     cardList.addAppendCard(cardItem);
+//   });
+// };
+
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      console.log(1)
+      const cardItem = createCard(item);
+      cardList.setAppendCard(cardItem);
+    },
+  },
+  '.cards'
+);
 
 //экземпляр валидации формы профайла
 const profileFormValidation = new FormValidator(
@@ -126,10 +139,10 @@ function handleAddPlaceFormSubmit(evt) {
 }
 
 //отрисовка элементов и запуск валидации форм
-renderElements();
+// renderElements();
+cardList.renderedItems();
 profileFormValidation.enableValidation();
 newPlaseFormValidator.enableValidation();
-
 
 // слушатели событий
 btnOpenPopupProfileElement.addEventListener('click', openPopupProfile);
