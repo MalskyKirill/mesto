@@ -105,12 +105,6 @@ function openPopupNewPlace() {
   newPlaseFormValidator.resetValidation();
 }
 
-// закрытие попапов по клику на оверлей
-// function closePopupByClickOnOverlay(evt, popup) {
-//   if (evt.target !== evt.currentTarget) return;
-//   closePopup(popup);
-// }
-
 // редактирование формы профиля
 function handleFormProfileSubmit(evt) {
   evt.preventDefault();
@@ -122,11 +116,6 @@ function handleFormProfileSubmit(evt) {
 
 // открываем попап с картинкой
 function handleCardClick(cardName, cardPhoto) {
-  // bigPictureImg.src = cardPhoto;
-  // bigPictureImg.alt = cardName;
-  // bigPictureName.textContent = cardName;
-
-  // openPopup(popupBigPictureElement);
   popupBigPicture.open(cardName, cardPhoto)
 }
 
@@ -162,11 +151,7 @@ btnOpenPopupNewPlaceElement.addEventListener('click', openPopupNewPlace);
 // btnClosePopupElements.forEach((btn) =>
 //   btn.addEventListener('click', () => closePopup(btn.closest('.popup')))
 // );
-// popupElements.forEach((popup) =>
-//   popup.addEventListener('click', (evt) =>
-//     closePopupByClickOnOverlay(evt, popup)
-//   )
-// );
+
 
 formProfileElement.addEventListener('submit', handleFormProfileSubmit);
 formNewPlaceElement.addEventListener('submit', handleAddPlaceFormSubmit);
