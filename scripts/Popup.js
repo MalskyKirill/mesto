@@ -5,7 +5,6 @@ class Popup {
 
   //закрытие попапа по эскейпу
   _handleEscClose = (evt) => {
-    console.log(evt);
     if (evt.key !== 'Escape') return;
     this.close();
   };
@@ -29,9 +28,6 @@ class Popup {
 
   //открытие попапа
   open() {
-    console.log(this);
-    console.log(this._element);
-    console.log(this._bigPictureImg);
     this._element.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose);
   }

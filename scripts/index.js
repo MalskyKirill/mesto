@@ -6,7 +6,7 @@ import FormValidator from './FormValidation.js';
 import { openPopup, closePopup } from './util.js';
 //import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
-import Popup from './Popup.js';
+import PopupWithForm from './PopupWithForm.js';
 
 const popupProfileElement = document.querySelector('#popupProfile');
 const popupNewPlaceElement = document.querySelector('#popupNewPlace');
@@ -45,17 +45,7 @@ const profileJob = document.querySelector('.profile__job');
 const bigPictureImg = document.querySelector('.popup__photo');
 const bigPictureName = document.querySelector('.popup__photo-name');
 
-// // создаем контейнер для карточек
-// const cardList = new CardList('.cards');
-
-// // первоночальная отрисовка карточек в контейнер
-// const renderElements = () => {
-//   initialCards.forEach((item) => {
-//     const cardItem = createCard(item);
-//     cardList.addAppendCard(cardItem);
-//   });
-// };
-
+//экземпляр секции карточек
 const cardList = new Section(
   {
     items: initialCards,
@@ -67,8 +57,10 @@ const cardList = new Section(
   '.cards'
 );
 
+//экземпляры попапов
 const popupBigPicture = new PopupWithImage('#popupBigPhoto');
-const popupForm = new Popup('#popupProfile');
+const popupProfile = new PopupWithForm('#popupProfile', handleFormProfileSubmit);
+const popupNewPlase = new PopupWithForm('#popupNewPlace', handleAddPlaceFormSubmit);
 
 //экземпляр валидации формы профайла
 const profileFormValidation = new FormValidator(
@@ -126,9 +118,9 @@ function handleAddPlaceFormSubmit(evt) {
   const item = {};
   item.name = titleFormFieldElement.value;
   item.link = linkFormFieldElement.value;
-
+  popupNewPlase._getInputValues()
   const cardItem = createCard(item);
-  cardList.addPrependCard(cardItem);
+  cardList.setPrependCard(cardItem);
 
   closePopup(popupNewPlaceElement);
 }
@@ -142,16 +134,18 @@ newPlaseFormValidator.enableValidation();
 
 //установка слушителей на попап
 popupBigPicture.setEventListeners();
+popupProfile.setEventListeners();
+popupNewPlase.setEventListeners();
 
 // слушатели событий
 // btnOpenPopupProfileElement.addEventListener('click', openPopupProfile);
-btnOpenPopupProfileElement.addEventListener('click', popupForm.open);
-btnOpenPopupNewPlaceElement.addEventListener('click', openPopupNewPlace);
+btnOpenPopupProfileElement.addEventListener('click', () => popupProfile.open());
+btnOpenPopupNewPlaceElement.addEventListener('click', () => popupNewPlase.open());
 
 // btnClosePopupElements.forEach((btn) =>
 //   btn.addEventListener('click', () => closePopup(btn.closest('.popup')))
 // );
 
 
-formProfileElement.addEventListener('submit', handleFormProfileSubmit);
-formNewPlaceElement.addEventListener('submit', handleAddPlaceFormSubmit);
+// formProfileElement.addEventListener('submit', handleFormProfileSubmit);
+// formNewPlaceElement.addEventListener('submit', handleAddPlaceFormSubmit);

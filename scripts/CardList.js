@@ -8,7 +8,7 @@ class CardList {
     this._container.append(card);
   }
   // добавляем карточку в начало списка
-  addPrependCard(card) {
+  addPrependCard = (card) => {
     this._container.prepend(card);
   }
 }
