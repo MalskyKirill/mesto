@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import { initialCards, validationConfig } from './consts.js';
 import Card from './Card.js';
 import Section from './Section.js';
