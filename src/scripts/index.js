@@ -21,7 +21,6 @@ const btnOpenPopupNewPlaceElement = document.querySelector(
 //экземпляр секции карточек
 const cardList = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       const cardItem = createCard(item);
       cardList.setAppendCard(cardItem);
@@ -92,7 +91,7 @@ function handleAddPlaceFormSubmit(evt, inputValues) {
 }
 
 //отрисовка элементов и запуск валидации форм
-cardList.renderedItems();
+cardList.renderedItems(initialCards);
 
 //запуск валидации форм
 profileFormValidation.enableValidation();
