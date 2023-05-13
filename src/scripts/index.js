@@ -18,6 +18,9 @@ const btnOpenPopupNewPlaceElement = document.querySelector(
   '.profile__add-button'
 );
 
+const popupUserNameElement = document.querySelector('.popup__field_next_name');
+const popupUserJobElement = document.querySelector('.popup__field_next_job');
+
 //экземпляр секции карточек
 const cardList = new Section(
   {
@@ -66,10 +69,10 @@ function createCard(item) {
 }
 
 // редактирование формы профиля
-function handleFormProfileSubmit(evt) {
+function handleFormProfileSubmit(evt, inputValues) {
   evt.preventDefault();
 
-  user.setUserInfo();
+  user.setUserInfo(inputValues);
   popupProfile.close();
 }
 
@@ -104,8 +107,13 @@ popupNewPlase.setEventListeners();
 
 // слушатели событий
 btnOpenPopupProfileElement.addEventListener('click', () => {
+
   popupProfile.open();
-  user.getUserInfo();
+
+  //заполнение формы при открытии попапа
+  popupUserNameElement.value = user.getUserInfo().name;
+  popupUserJobElement.value = user.getUserInfo().job;
+
   profileFormValidation.resetValidation();
 });
 
@@ -113,4 +121,3 @@ btnOpenPopupNewPlaceElement.addEventListener('click', () => {
   popupNewPlase.open();
   newPlaseFormValidator.resetValidation();
 });
-

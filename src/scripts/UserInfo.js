@@ -1,7 +1,7 @@
 class UserInfo {
   constructor({ name, job }) {
-    this._name = document.querySelector(name);
-    this._job = document.querySelector(job);
+    // this._name = document.querySelector(name)
+    // this._job = document.querySelector(job)
 
     this._profileName = document.querySelector('.profile__name');
     this._profileJob = document.querySelector('.profile__job');
@@ -9,14 +9,17 @@ class UserInfo {
 
   //подставляем данные о юзере из разметки
   getUserInfo() {
-    this._name.value = this._profileName.textContent;
-    this._job.value = this._profileJob.textContent;
+    const userInfo = {};
+    userInfo.name = this._profileName.textContent
+    userInfo.job = this._profileJob.textContent;
+
+    return userInfo;
   }
 
   //устанавливаем новые данные при сабмите
-  setUserInfo() {
-    this._profileName.textContent = this._name.value;
-    this._profileJob.textContent = this._job.value;
+  setUserInfo({name, job}) {
+    this._profileName.textContent = name;
+    this._profileJob.textContent = job;
   }
 }
 
