@@ -80,10 +80,10 @@ function handleCardClick(cardName, cardPhoto) {
 }
 
 // форма добавления карточки
-function handleAddPlaceFormSubmit(evt) {
+function handleAddPlaceFormSubmit(evt, inputValues) {
   evt.preventDefault();
 
-  const item = popupNewPlase.getInputValues();
+  const item = inputValues;
 
   const cardItem = createCard(item);
   cardList.setPrependCard(cardItem);
@@ -112,7 +112,6 @@ btnOpenPopupProfileElement.addEventListener('click', () => {
 
 btnOpenPopupNewPlaceElement.addEventListener('click', () => {
   popupNewPlase.open();
-  popupNewPlase.reset();
   newPlaseFormValidator.resetValidation();
 });
 

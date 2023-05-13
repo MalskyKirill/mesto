@@ -6,13 +6,12 @@ class PopupWithForm extends Popup {
 
     this._handleSubmitForm = handleSubmitForm;
 
-    this._element = document.querySelector(popupSelector);
     this._form = this._element.querySelector('.popup__form');
     this._formInputs = this._form.querySelectorAll('.popup__field');
   }
 
   // собирает данные формы
-  getInputValues() {
+  _getInputValues() {
     const item = {};
     this._formInputs.forEach((input) => {
       item[`${input.id}`] = input.value;
@@ -21,13 +20,13 @@ class PopupWithForm extends Popup {
     return item;
   }
 
-  //сбрасывает поля формы
-  reset() {
+  close() {
     this._form.reset();
+    super.close();
   }
 
   setEventListeners() {
-    this._form.addEventListener('submit', (evt) => this._handleSubmitForm(evt));
+    this._form.addEventListener('submit', (evt) => this._handleSubmitForm(evt, this._getInputValues()));
 
     super.setEventListeners();
   }
