@@ -21,6 +21,22 @@ class ApiService {
       .catch((err) => console.log(err));
   }
 
+  getCards() {
+    return fetch(`${this._url}/cards`, {
+      headers: {
+        authorization: this._authorizationToken,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
+  }
 }
 
 export default ApiService;

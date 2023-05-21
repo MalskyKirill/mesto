@@ -111,11 +111,11 @@ apiService.getUser().then((data) => {
   userAvatarElement.src = data.avatar;
 });
 
+//отрисовка карточек полученных с сервера
+apiService.getCards().then((data) => {
+  cardList.renderedItems(data)
+})
 
-
-
-//отрисовка элементов и запуск валидации форм
-cardList.renderedItems(initialCards);
 
 //запуск валидации форм
 profileFormValidation.enableValidation();
