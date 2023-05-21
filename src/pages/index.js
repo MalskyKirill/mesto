@@ -84,6 +84,11 @@ function handleFormProfileSubmit(evt, inputValues) {
   evt.preventDefault();
 
   user.setUserInfo(inputValues);
+
+  const newUserData = user.getUserInfo()
+  apiService.edingProfile(newUserData)
+
+
   popupProfile.close();
 }
 
@@ -100,6 +105,10 @@ function handleAddPlaceFormSubmit(evt, inputValues) {
 
   const cardItem = createCard(item);
   cardList.setPrependCard(cardItem);
+
+  console.log(item)
+
+  apiService.addCard(item)
 
   popupNewPlase.close();
 }
