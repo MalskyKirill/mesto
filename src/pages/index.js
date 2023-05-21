@@ -1,12 +1,13 @@
 import './index.css';
 
-import { initialCards, validationConfig } from '../utils/consts.js';
+import { initialCards, validationConfig, URL, AUTHORIZATION_KEY } from '../utils/consts.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidation.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import ApiService from '../components/ApiService.js';
 
 const popupProfileElement = document.querySelector('#popupProfile');
 const popupNewPlaceElement = document.querySelector('#popupNewPlace');
@@ -20,6 +21,10 @@ const btnOpenPopupNewPlaceElement = document.querySelector(
 
 const popupUserNameElement = document.querySelector('.popup__field_next_name');
 const popupUserJobElement = document.querySelector('.popup__field_next_job');
+
+const userNameElement = document.querySelector('.profile__name');
+const userJobElement = document.querySelector('.profile__job');
+const userAvatarElement = document.querySelector('.profile__avatar');
 
 //экземпляр секции карточек
 const cardList = new Section(
@@ -48,6 +53,12 @@ const user = new UserInfo({
   name: '.popup__field_next_name',
   job: '.popup__field_next_job',
 });
+
+//экземпляр апи
+const apiService = new ApiService(
+  URL,
+  AUTHORIZATION_KEY
+);
 
 //экземпляр валидации формы профайла
 const profileFormValidation = new FormValidator(
@@ -93,6 +104,16 @@ function handleAddPlaceFormSubmit(evt, inputValues) {
   popupNewPlase.close();
 }
 
+//получили данные о пользователе с сервера и подставили их в разметку
+apiService.getUser().then((data) => {
+  userNameElement.textContent = data.name;
+  userJobElement.textContent = data.about;
+  userAvatarElement.src = data.avatar;
+});
+
+
+
+
 //отрисовка элементов и запуск валидации форм
 cardList.renderedItems(initialCards);
 
@@ -107,7 +128,6 @@ popupNewPlase.setEventListeners();
 
 // слушатели событий
 btnOpenPopupProfileElement.addEventListener('click', () => {
-
   popupProfile.open();
 
   //заполнение формы при открытии попапа
