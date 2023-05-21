@@ -83,13 +83,17 @@
       <p class="popup__photo-name"></p>
     </div>
   </div>
+  <!-- шаблон карточки -->
   <template class="card_template">
     <li class="card">
       <img src="https://" alt="Случайная фотка" class="card__photo">
       <button class="card__trash"></button>
       <div class="card__wrap">
         <h2 class="card__name"></h2>
-        <button class="card__like" type="button"></button>
+        <div class="card__like-wrap">
+          <button class="card__like" type="button"></button>
+          <span class="card__like-count">0</span>
+        </div>
       </div>
     </li>
   </template>

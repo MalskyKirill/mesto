@@ -4,6 +4,7 @@ class ApiService {
     this._authorizationToken = authorizationToken;
   }
 
+  // получает данные в профайл с сервера
   getUser() {
     return fetch(`${this._url}/users/me`, {
       headers: {
@@ -21,6 +22,7 @@ class ApiService {
       .catch((err) => console.log(err));
   }
 
+  // получает карточки с сервера
   getCards() {
     return fetch(`${this._url}/cards`, {
       headers: {
@@ -38,6 +40,7 @@ class ApiService {
       .catch((err) => console.log(err));
   }
 
+  //отправляет изменныные данниу профайла на сервер
   edingProfile({ name, job }) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
@@ -60,6 +63,7 @@ class ApiService {
       .catch((err) => console.log(err));
   }
 
+  // отправляет новую карточку на сервер
   addCard({title: name, link}) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
