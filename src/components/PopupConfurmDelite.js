@@ -11,7 +11,6 @@ class PopupConfurmDelite extends Popup {
   open(data) {
     super.open();
     this._cardId = data;
-    console.log(this._cardId)
   }
 
 

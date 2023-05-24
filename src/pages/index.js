@@ -90,10 +90,6 @@ function createCard(item) {
   return cardElemtnt;
 }
 
-function handleDeliteCard(card, cardId) {
-  popupConfurmDelite.open({card, cardId})
-}
-
 // редактирование формы профиля
 function handleFormProfileSubmit(evt, inputValues) {
   evt.preventDefault();
@@ -111,32 +107,34 @@ function handleCardClick(cardName, cardPhoto) {
   popupBigPicture.open(cardName, cardPhoto);
 }
 
-//открытие попапа удаления
+//функционал удаления карточки
 function handleConfurmDelite({card, cardId}) {
-  console.log(card)
   apiService.deliteCard(cardId)
   .then(() => {
-    console.log(cardId)
+
     card.remove();
     popupConfurmDelite.close()
   })
   .catch(err => console.log(err))
-
-
 }
 
 // форма добавления карточки
 function handleAddPlaceFormSubmit(evt, inputValues) {
   evt.preventDefault();
 
-  const item = inputValues;
-  const cardItem = createCard(item);
-  cardList.setPrependCard(cardItem);
+  apiService.addCard(inputValues)
+  .then(item => {
+    const cardItem = createCard(item);
+    cardList.setPrependCard(cardItem);
+    popupNewPlase.close();
+  })
+  .catch(err => console.log(err))
 
-  apiService.addCard(item);
+}
 
-
-  popupNewPlase.close();
+//открытие попапа удаления карточки
+function handleDeliteCard(card, cardId) {
+  popupConfurmDelite.open({card, cardId})
 }
 
 //получили данные о пользователе с сервера и подставили их в разметку

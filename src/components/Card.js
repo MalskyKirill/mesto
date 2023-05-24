@@ -19,11 +19,6 @@ class Card {
     return cardElement;
   }
 
-  //удаление карточки
-  _onDelite() {
-    this._card.remove();
-  }
-
   //лайк карточки
   _onLike() {
     this.classList.toggle('card__like_active');

@@ -76,15 +76,15 @@ class ApiService {
         link: link,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          console.log(res.json())
-          return res.json();
-        }
+    .then(res => {
+      if(res.ok) {
+        return res.json()
+      }
 
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+      return Promise.reject(`Ошибка: ${res.status}`)
+    })
+    .catch(err => console.log(err))
+
   }
 
   //удалить карточку
