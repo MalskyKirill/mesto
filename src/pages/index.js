@@ -1,6 +1,11 @@
 import './index.css';
 
-import { initialCards, validationConfig, URL, AUTHORIZATION_KEY } from '../utils/consts.js';
+import {
+  initialCards,
+  validationConfig,
+  URL,
+  AUTHORIZATION_KEY,
+} from '../utils/consts.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidation.js';
@@ -8,6 +13,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import ApiService from '../components/ApiService.js';
+import PopupConfurmDelite from '../components/PopupConfurmDelite';
 
 const popupProfileElement = document.querySelector('#popupProfile');
 const popupNewPlaceElement = document.querySelector('#popupNewPlace');
@@ -31,6 +37,10 @@ const cardList = new Section(
   {
     renderer: (item) => {
       const cardItem = createCard(item);
+
+      if (item.owner._id !== '0f3dacbd8ae3055c92a37be3') {
+        cardItem.querySelector('.card__trash').remove();
+      }
       cardList.setAppendCard(cardItem);
     },
   },
@@ -47,6 +57,10 @@ const popupNewPlase = new PopupWithForm(
   '#popupNewPlace',
   handleAddPlaceFormSubmit
 );
+const popupConfurmDelite = new PopupConfurmDelite(
+  '#popupConfurmDelite',
+  handleConfurmDelite
+);
 
 // экземпляр юзеринфо
 const user = new UserInfo({
@@ -55,10 +69,7 @@ const user = new UserInfo({
 });
 
 //экземпляр апи
-const apiService = new ApiService(
-  URL,
-  AUTHORIZATION_KEY
-);
+const apiService = new ApiService(URL, AUTHORIZATION_KEY);
 
 //экземпляр валидации формы профайла
 const profileFormValidation = new FormValidator(
@@ -74,9 +85,13 @@ const newPlaseFormValidator = new FormValidator(
 
 //создание карточки
 function createCard(item) {
-  const cardItem = new Card(item, '.card_template', handleCardClick);
+  const cardItem = new Card(item, '.card_template', handleCardClick, handleDeliteCard);
   const cardElemtnt = cardItem.getCard();
   return cardElemtnt;
+}
+
+function handleDeliteCard(card, cardId) {
+  popupConfurmDelite.open({card, cardId})
 }
 
 // редактирование формы профиля
@@ -85,9 +100,8 @@ function handleFormProfileSubmit(evt, inputValues) {
 
   user.setUserInfo(inputValues);
 
-  const newUserData = user.getUserInfo()
-  apiService.edingProfile(newUserData)
-
+  const newUserData = user.getUserInfo();
+  apiService.edingProfile(newUserData);
 
   popupProfile.close();
 }
@@ -97,18 +111,30 @@ function handleCardClick(cardName, cardPhoto) {
   popupBigPicture.open(cardName, cardPhoto);
 }
 
+//открытие попапа удаления
+function handleConfurmDelite({card, cardId}) {
+  console.log(card)
+  apiService.deliteCard(cardId)
+  .then(() => {
+    console.log(cardId)
+    card.remove();
+    popupConfurmDelite.close()
+  })
+  .catch(err => console.log(err))
+
+
+}
+
 // форма добавления карточки
 function handleAddPlaceFormSubmit(evt, inputValues) {
   evt.preventDefault();
 
   const item = inputValues;
-
   const cardItem = createCard(item);
   cardList.setPrependCard(cardItem);
 
-  console.log(item)
+  apiService.addCard(item);
 
-  apiService.addCard(item)
 
   popupNewPlase.close();
 }
@@ -121,10 +147,10 @@ apiService.getUser().then((data) => {
 });
 
 //отрисовка карточек полученных с сервера
-apiService.getCards().then((data) => {
-  cardList.renderedItems(data)
-})
-
+apiService.getCards()
+  .then((data) => {
+    cardList.renderedItems(data);
+  })
 
 //запуск валидации форм
 profileFormValidation.enableValidation();
@@ -134,6 +160,7 @@ newPlaseFormValidator.enableValidation();
 popupBigPicture.setEventListeners();
 popupProfile.setEventListeners();
 popupNewPlase.setEventListeners();
+popupConfurmDelite.setEventListeners();
 
 // слушатели событий
 btnOpenPopupProfileElement.addEventListener('click', () => {

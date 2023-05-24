@@ -64,7 +64,7 @@ class ApiService {
   }
 
   // отправляет новую карточку на сервер
-  addCard({title: name, link}) {
+  addCard({ title: name, link }) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: {
@@ -76,14 +76,34 @@ class ApiService {
         link: link,
       }),
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+      .then((res) => {
+        if (res.ok) {
+          console.log(res.json())
+          return res.json();
+        }
 
-      return Promise.reject(`Ошибка: ${res.status}`);
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  //удалить карточку
+  deliteCard(_id) {
+    return fetch(`${this._url}/cards/${_id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorizationToken,
+        'Content-Type': 'application/json',
+      },
     })
-    .catch((err) => console.log(err));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
   }
 }
 

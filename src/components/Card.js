@@ -1,10 +1,14 @@
 class Card {
-  constructor({name, link, title}, templateSelector, handleCardClick) {
+  constructor({name, link, title, _id}, templateSelector, handleCardClick, handleDeliteCard) {
     this._title = name ? name : title;
     this._image = link;
 
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+
+    this._handleDeliteCard = handleDeliteCard;
+
+    this._id = _id;
   }
 
   // клонируем элемент из разметки
@@ -42,7 +46,9 @@ class Card {
 
     this._card
       .querySelector('.card__trash')
-      .addEventListener('click', this._onDelite.bind(this));
+      .addEventListener('click', () => {
+        this._handleDeliteCard(this._card, this._id)
+      });
 
     this._card
       .querySelector('.card__photo')
