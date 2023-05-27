@@ -76,20 +76,57 @@ class ApiService {
         link: link,
       }),
     })
-    .then(res => {
-      if(res.ok) {
-        return res.json()
-      }
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
 
-      return Promise.reject(`Ошибка: ${res.status}`)
-    })
-    .catch(err => console.log(err))
-
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
   }
 
   //удалить карточку
   deliteCard(_id) {
     return fetch(`${this._url}/cards/${_id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorizationToken,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  //лайк карточки
+  likeCard(_id) {
+    return fetch(`${this._url}/cards/${_id}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._authorizationToken,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  //удаление лайка
+  deliteLikeCard(_id) {
+    return fetch(`${this._url}/cards/${_id}/likes`, {
       method: 'DELETE',
       headers: {
         authorization: this._authorizationToken,
