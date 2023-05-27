@@ -17,6 +17,7 @@ import PopupConfurmDelite from '../components/PopupConfurmDelite';
 
 const popupProfileElement = document.querySelector('#popupProfile');
 const popupNewPlaceElement = document.querySelector('#popupNewPlace');
+const popupNewAvatarelement = document.querySelector('#popupNewAvatar');
 
 const btnOpenPopupProfileElement = document.querySelector(
   '.profile__edit-button'
@@ -24,6 +25,7 @@ const btnOpenPopupProfileElement = document.querySelector(
 const btnOpenPopupNewPlaceElement = document.querySelector(
   '.profile__add-button'
 );
+const btnOpenPopupNewAvatarElement = document.querySelector('.profile__avatar');
 
 const popupUserNameElement = document.querySelector('.popup__field_next_name');
 const popupUserJobElement = document.querySelector('.popup__field_next_job');
@@ -62,10 +64,15 @@ const popupConfurmDelite = new PopupConfurmDelite(
   handleConfurmDelite
 );
 
+const popupNewAvatar = new PopupWithForm(
+  '#popupNewAvatar',
+  handleNewAvatarFormSubmit
+);
+
 // экземпляр юзеринфо
 const user = new UserInfo({
   name: document.querySelector('.profile__name'),
-  job: document.querySelector('.profile__job'),
+  about: document.querySelector('.profile__job'),
   avatar: document.querySelector('.profile__avatar'),
 });
 
@@ -84,6 +91,12 @@ const newPlaseFormValidator = new FormValidator(
   popupNewPlaceElement
 );
 
+//экземпляр валидации формы смены аватара
+const newAvatarFormValidator = new FormValidator(
+  validationConfig,
+  popupNewAvatarelement
+);
+
 //создание карточки
 function createCard(item, user) {
   const cardItem = new Card(
@@ -93,6 +106,7 @@ function createCard(item, user) {
     handleCardClick,
     handleDeliteCard,
     {
+      // лайк карточки
       handleLikeCard: (cardId) => {
         if (!cardItem.isLiked()) {
           apiService
@@ -118,11 +132,43 @@ function handleFormProfileSubmit(evt, inputValues) {
   evt.preventDefault();
 
   user.setUserInfo(inputValues);
-  const newUserData = user.getUserInfo();
+  const newData = user.getUserInfo();
 
-  apiService.edingProfile(newUserData);
+  apiService
+    .edingProfile(newData)
+    .then((data) => {
+      user.setUserInfo(data);
+    })
+    .catch((err) => console.log(err));
 
   popupProfile.close();
+}
+
+// форма добавления карточки
+function handleAddPlaceFormSubmit(evt, inputValues) {
+  evt.preventDefault();
+
+  apiService
+    .addCard(inputValues)
+    .then((item) => {
+      const cardItem = createCard(item);
+      cardList.setPrependCard(cardItem);
+      popupNewPlase.close();
+    })
+    .catch((err) => console.log(err));
+}
+
+//форма редактирования аватарки
+function handleNewAvatarFormSubmit(evt, inputValues) {
+  evt.preventDefault();
+
+  apiService
+    .changeAvatar(inputValues.link)
+    .then((data) => {
+      userAvatarElement.src = data.avatar;
+      popupNewAvatar.close();
+    })
+    .catch((err) => console.log(err));
 }
 
 // открываем попап с картинкой
@@ -141,20 +187,6 @@ function handleConfurmDelite({ card, cardId }) {
     .catch((err) => console.log(err));
 }
 
-// форма добавления карточки
-function handleAddPlaceFormSubmit(evt, inputValues) {
-  evt.preventDefault();
-
-  apiService
-    .addCard(inputValues)
-    .then((item) => {
-      const cardItem = createCard(item);
-      cardList.setPrependCard(cardItem);
-      popupNewPlase.close();
-    })
-    .catch((err) => console.log(err));
-}
-
 //открытие попапа удаления карточки
 function handleDeliteCard(card, cardId) {
   popupConfurmDelite.open({ card, cardId });
@@ -162,6 +194,7 @@ function handleDeliteCard(card, cardId) {
 
 //получили данные о пользователе с сервера и подставили их в разметку
 apiService.getUser().then((data) => {
+  console.log(data);
   user.setUserInfo(data);
 
   userNameElement.textContent = data.name;
@@ -177,20 +210,23 @@ apiService.getCards().then((data) => {
 //запуск валидации форм
 profileFormValidation.enableValidation();
 newPlaseFormValidator.enableValidation();
+newAvatarFormValidator.enableValidation();
 
 //установка слушителей на попап
 popupBigPicture.setEventListeners();
 popupProfile.setEventListeners();
 popupNewPlase.setEventListeners();
 popupConfurmDelite.setEventListeners();
+popupNewAvatar.setEventListeners();
 
 // слушатели событий
 btnOpenPopupProfileElement.addEventListener('click', () => {
   popupProfile.open();
 
   //заполнение формы при открытии попапа
+
   popupUserNameElement.value = user.getUserInfo().name;
-  popupUserJobElement.value = user.getUserInfo().job;
+  popupUserJobElement.value = user.getUserInfo().about;
 
   profileFormValidation.resetValidation();
 });
@@ -198,4 +234,8 @@ btnOpenPopupProfileElement.addEventListener('click', () => {
 btnOpenPopupNewPlaceElement.addEventListener('click', () => {
   popupNewPlase.open();
   newPlaseFormValidator.resetValidation();
+});
+
+btnOpenPopupNewAvatarElement.addEventListener('click', () => {
+  popupNewAvatar.open();
 });

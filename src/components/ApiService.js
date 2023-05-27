@@ -41,7 +41,7 @@ class ApiService {
   }
 
   //отправляет изменныные данниу профайла на сервер
-  edingProfile({ name, job }) {
+  edingProfile({ name, about }) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -50,7 +50,7 @@ class ApiService {
       },
       body: JSON.stringify({
         name: name,
-        about: job,
+        about: about,
       }),
     })
       .then((res) => {
@@ -132,6 +132,28 @@ class ApiService {
         authorization: this._authorizationToken,
         'Content-Type': 'application/json',
       },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  //смена аватара
+  changeAvatar(link) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._authorizationToken,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        avatar: link
+      })
     })
       .then((res) => {
         if (res.ok) {

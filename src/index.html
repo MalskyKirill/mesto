@@ -16,7 +16,7 @@
     </header>
     <main class="content">
       <section aria-label="Профиль" class="profile">
-        <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="аватар">
+        <img class="profile__avatar" src="" alt="аватар">
         <div class="profile__info">
           <div class="profile__wrap">
             <h1 class="profile__name"></h1>
@@ -48,7 +48,7 @@
         </label>
         <label class="popup__field-wrap">
           <input id="job" type="text" class="popup__field popup__field_next_job" placeholder="Вид деятельности"
-            name="job" minlength="2" maxlength="200" required>
+            name="about" minlength="2" maxlength="200" required>
           <span class="popup__field-error popup__field-error-job">ошибка профайла</span>
         </label>
         <button class="popup__save" type="submit" form="profileField">Сохранить</button>
@@ -72,6 +72,21 @@
           <span class="popup__field-error popup__field-error-link">ошибка юрл адреса</span>
         </label>
         <button class="popup__save" type="submit" form="newPlaceField">Создать</button>
+      </form>
+    </div>
+  </div>
+  <!-- попап смены аватара -->
+  <div class="popup" id="popupNewAvatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <button class="popup__close" type="button" id="closePopupNewAvatar"></button>
+      <form class="popup__form" id="newAvatarField" name="popupForm" novalidate>
+        <label class="popup__field-wrap">
+          <input id="link" type="url" class="popup__field popup__field_next_link" placeholder="Ссылка на картинку"
+            name="link" required>
+          <span class="popup__field-error popup__field-error-link">ошибка юрл адреса</span>
+        </label>
+        <button class="popup__save" type="submit" form="newAvatarField">Сохранить</button>
       </form>
     </div>
   </div>

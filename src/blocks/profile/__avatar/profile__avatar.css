@@ -2,3 +2,8 @@
   max-width: 120px;
   border-radius: 50%;
 }
+
+.profile__avatar:hover {
+  opacity: 0.2;
+  cursor: url(../../../images/vector-pen.svg), pointer;
+}

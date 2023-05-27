@@ -29,11 +29,6 @@ class Card {
     return cardElement;
   }
 
-  //лайк карточки
-  _onLike() {
-    this.classList.toggle('card__like_active');
-  }
-
   // создаем карточку
   _createCard() {
     this._card = this._getTemalate();

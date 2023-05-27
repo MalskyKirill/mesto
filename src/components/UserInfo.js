@@ -1,8 +1,8 @@
 class UserInfo {
-  constructor({ id, name, job, avatar }) {
+  constructor({ id, name, about, avatar }) {
     this._id = id;
-    this._profileName = name
-    this._profileJob = job
+    this._profileName = name;
+    this._profileJob = about;
     this._profileAvatar = avatar;
   }
 
@@ -12,14 +12,14 @@ class UserInfo {
 
     userInfo._id = this._id;
     userInfo.name = this._profileName.textContent;
-    userInfo.job = this._profileJob.textContent;
+    userInfo.about = this._profileJob.textContent;
     userInfo.avatar = this._profileAvatar;
 
     return userInfo;
   }
 
   //устанавливаем новые данные
-  setUserInfo({_id, name, about, avatar}) {
+  setUserInfo({ _id, name, about, avatar }) {
     this._profileName.textContent = name;
     this._profileJob.textContent = about;
     this._id = _id;
