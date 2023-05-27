@@ -97,6 +97,14 @@ const newAvatarFormValidator = new FormValidator(
   popupNewAvatarelement
 );
 
+function loading(popup, isLoading) {
+  const saveBtn = document.querySelector(popup).querySelector('.popup__save');
+
+  isLoading
+    ? (saveBtn.textContent = 'Сохранение')
+    : (saveBtn.textContent = 'Успешно');
+}
+
 //создание карточки
 function createCard(item, user) {
   const cardItem = new Card(
@@ -134,10 +142,13 @@ function handleFormProfileSubmit(evt, inputValues) {
   user.setUserInfo(inputValues);
   const newData = user.getUserInfo();
 
+  loading('#popupProfile', true);
+
   apiService
     .edingProfile(newData)
     .then((data) => {
       user.setUserInfo(data);
+      loading('#popupProfile', false);
     })
     .catch((err) => console.log(err));
 
@@ -148,11 +159,15 @@ function handleFormProfileSubmit(evt, inputValues) {
 function handleAddPlaceFormSubmit(evt, inputValues) {
   evt.preventDefault();
 
+  loading('#popupNewPlace', true);
+
   apiService
     .addCard(inputValues)
     .then((item) => {
       const cardItem = createCard(item);
       cardList.setPrependCard(cardItem);
+
+      loading('#popupNewPlace', false);
       popupNewPlase.close();
     })
     .catch((err) => console.log(err));
@@ -161,11 +176,12 @@ function handleAddPlaceFormSubmit(evt, inputValues) {
 //форма редактирования аватарки
 function handleNewAvatarFormSubmit(evt, inputValues) {
   evt.preventDefault();
-
+  loading('#popupNewAvatar', true);
   apiService
     .changeAvatar(inputValues.link)
     .then((data) => {
       userAvatarElement.src = data.avatar;
+      loading('#popupNewAvatar', false);
       popupNewAvatar.close();
     })
     .catch((err) => console.log(err));
@@ -225,6 +241,8 @@ btnOpenPopupProfileElement.addEventListener('click', () => {
 
   //заполнение формы при открытии попапа
 
+  popupProfileElement.querySelector('.popup__save').textContent = 'Сохранить';
+
   popupUserNameElement.value = user.getUserInfo().name;
   popupUserJobElement.value = user.getUserInfo().about;
 
@@ -233,9 +251,15 @@ btnOpenPopupProfileElement.addEventListener('click', () => {
 
 btnOpenPopupNewPlaceElement.addEventListener('click', () => {
   popupNewPlase.open();
+
+  popupNewPlaceElement.querySelector('.popup__save').textContent = 'Создать';
   newPlaseFormValidator.resetValidation();
 });
 
 btnOpenPopupNewAvatarElement.addEventListener('click', () => {
   popupNewAvatar.open();
+
+  popupNewAvatarelement.querySelector('.popup__save').textContent = 'Сохранить';
+
+  newAvatarFormValidator.resetValidation();
 });
