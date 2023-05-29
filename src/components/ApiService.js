@@ -4,6 +4,13 @@ class ApiService {
     this._authorizationToken = authorizationToken;
   }
 
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+  }
+
   // получает данные в профайл с сервера
   getUser() {
     return fetch(`${this._url}/users/me`, {
@@ -11,15 +18,9 @@ class ApiService {
         authorization: this._authorizationToken,
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+    }).then((res) => {
+      return this._getResponseData(res);
+    });
   }
 
   // получает карточки с сервера
@@ -29,15 +30,9 @@ class ApiService {
         authorization: this._authorizationToken,
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+    }).then((res) => {
+      return this._getResponseData(res);
+    });
   }
 
   //отправляет изменныные данниу профайла на сервер
@@ -52,15 +47,9 @@ class ApiService {
         name: name,
         about: about,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+    }).then((res) => {
+      return this._getResponseData(res);
+    });
   }
 
   // отправляет новую карточку на сервер
@@ -75,15 +64,9 @@ class ApiService {
         name: name,
         link: link,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+    }).then((res) => {
+      return this._getResponseData(res);
+    });
   }
 
   //удалить карточку
@@ -94,15 +77,9 @@ class ApiService {
         authorization: this._authorizationToken,
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+    }).then((res) => {
+      return this._getResponseData(res);
+    });
   }
 
   //лайк карточки
@@ -113,15 +90,9 @@ class ApiService {
         authorization: this._authorizationToken,
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+    }).then((res) => {
+      return this._getResponseData(res);
+    });
   }
 
   //удаление лайка
@@ -132,15 +103,9 @@ class ApiService {
         authorization: this._authorizationToken,
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+    }).then((res) => {
+      return this._getResponseData(res);
+    });
   }
 
   //смена аватара
@@ -152,17 +117,11 @@ class ApiService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        avatar: link
-      })
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => console.log(err));
+        avatar: link,
+      }),
+    }).then((res) => {
+      return this._getResponseData(res);
+    });
   }
 }
 
