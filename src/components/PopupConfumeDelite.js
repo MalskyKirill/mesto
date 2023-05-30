@@ -12,9 +12,8 @@ class PopupConfurmDelite extends Popup {
   }
 
   setEventListeners() {
-
     this._form.addEventListener('submit', (evt) => {
-      evt.preventDefault()
+      evt.preventDefault();
       this._handleSubmit();
     });
     super.setEventListeners();
