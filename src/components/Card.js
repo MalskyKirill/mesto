@@ -1,16 +1,17 @@
 class Card {
   constructor(
-    { name, link, title, _id, likes },
+    { name, link, title, _id, likes, owner },
     user,
     templateSelector,
     handleCardClick,
-    handleDeliteCard,
-    { handleLikeCard }
+    // handleDeliteCard,
+    { handleDeliteCard, handleLikeCard }
   ) {
     this._title = name ? name : title;
     this._image = link;
     this._id = _id;
     this._likes = likes;
+    this._owner = owner;
 
     this._user = user;
 
@@ -34,12 +35,20 @@ class Card {
     this._card = this._getTemalate();
 
     this._setCardEventListeners();
+    this._setDeleteIcon();
 
     this._cardTitle.textContent = this._title;
     this._cardImage.src = this._image;
     this._cardImage.alt = this._title;
 
-    this.setCardLikes({likes: this._likes})
+    this.setCardLikes({ likes: this._likes });
+  }
+
+  //удаление значка корзинки у чужих карточек
+  _setDeleteIcon() {
+    if (this._user._id !== this._owner._id) {
+      this._card.querySelector('.card__trash').remove();
+    }
   }
 
   _setCardEventListeners() {
@@ -47,7 +56,7 @@ class Card {
     this._cardTitle = this._card.querySelector('.card__name');
 
     this._card.querySelector('.card__trash').addEventListener('click', () => {
-      this._handleDeliteCard(this._card, this._id);
+      this._handleDeliteCard(this._id);
     });
 
     this._card
@@ -85,6 +94,10 @@ class Card {
         .querySelector('.card__like')
         .classList.remove('card__like_active');
     }
+  }
+
+  deleteElement() {
+    this._card.remove()
   }
 
   // возвращаем карточку

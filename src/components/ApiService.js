@@ -70,7 +70,7 @@ class ApiService {
   }
 
   //удалить карточку
-  deliteCard(_id) {
+  deleteCard(_id) {
     return fetch(`${this._url}/cards/${_id}`, {
       method: 'DELETE',
       headers: {
