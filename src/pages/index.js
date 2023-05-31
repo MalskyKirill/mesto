@@ -95,12 +95,10 @@ function createCard(item, user) {
           .deleteCard(cardId)
           .then(() => {
             cardItem.deleteElement();
+            popupConfurmDelite.close();
           })
           .catch((err) => {
             console.log(err);
-          })
-          .finally(() => {
-            popupConfurmDelite.close();
           });
       });
     },
@@ -137,8 +135,6 @@ function handleFormProfileSubmit(inputValues) {
     .catch((err) => console.log(err))
     .finally(() => {
       popupProfile.loading(false);
-      popupProfileElement.querySelector('.popup__save').textContent =
-        'Сохранить';
     });
 }
 
@@ -158,8 +154,6 @@ function handleAddPlaceFormSubmit(inputValues) {
     .catch((err) => console.log(err))
     .finally(() => {
       popupNewPlase.loading(false);
-      popupNewPlaceElement.querySelector('.popup__save').textContent =
-        'Создать';
     });
 }
 
@@ -176,8 +170,6 @@ function handleNewAvatarFormSubmit(inputValues) {
     .catch((err) => console.log(err))
     .finally(() => {
       popupNewAvatar.loading(false);
-      popupNewAvatarelement.querySelector('.popup__save').textContent =
-        'Сохранить';
     });
 }
 

@@ -9,6 +9,8 @@ class PopupWithForm extends Popup {
     this._form = this._element.querySelector('.popup__form');
     this._formInputs = this._form.querySelectorAll('.popup__field');
     this._saveBtn = this._element.querySelector('.popup__save');
+
+    this._textAfterSaving = this._saveBtn.textContent;
   }
 
   // собирает данные формы
@@ -37,8 +39,8 @@ class PopupWithForm extends Popup {
 
   loading(isLoading) {
     isLoading
-      ? (this._saveBtn.textContent = 'Сохранение')
-      : (this._saveBtn.textContent = 'Успешно');
+      ? (this._saveBtn.textContent = 'Сохранение...')
+      : (this._saveBtn.textContent = this._textAfterSaving);
   }
 }
 
